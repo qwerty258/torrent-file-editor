@@ -1,5 +1,6 @@
 #!/usr/bin/make -f
 export QT_SELECT := qt6
+export QT6_BUILD := ON
 
 %:
 	dh $@
