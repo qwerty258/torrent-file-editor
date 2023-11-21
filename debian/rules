@@ -1,10 +1,10 @@
 #!/usr/bin/make -f
-export QT_SELECT=qt6
-export QT6_BUILD=ON
+#export QT_SELECT=qt6
+#export QT6_BUILD=ON
 
 %:
 	dh $@
 
 override_dh_auto_configure:
-    dh_auto_configure -- -DQT6_BUILD=ON
+	dh_auto_configure -- -DQT6_BUILD=ON
 
