@@ -1,3 +1,9 @@
+torrent-file-editor (1.0.0) UNRELEASED; urgency=medium
+
+  Bump to v1.0.0
+
+ -- Ivan Romanov <drizt72@zoho.eu>  Tue, 8 Oct 2024 13:29:54 +0500
+
 torrent-file-editor (0.3.18) UNRELEASED; urgency=medium
 
   IMPORTANT: Please download our source code package torrent-file-editor-0.3.18.tar.gz and NOT the automatically created GitHub packages at the bottom of the list.
