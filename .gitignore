@@ -12,6 +12,11 @@
 /*.patch
 /*.exe
 /build
+/debug-qt[0-9]
+/release-qt[0-9]
+/CMakeLists.txt.user
+/all_languages.txt
+/all_languages.yaml
 
 # C++ objects and libs
 
