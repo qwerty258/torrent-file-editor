@@ -109,7 +109,7 @@ QTextCodec *BencodeModel::textCodec() const
 
 void BencodeModel::setName(const QString &name)
 {
-    if (name.isEmpty() && _bencode && _bencode->child("info") && _bencode->child("info")->child("name")) { // -V807 PVS-Studio
+    if (name.isEmpty() && _bencode && _bencode->child("info") && _bencode->child("info")->child("name")) {
         removeRow(_bencode->child("info")->child("name")->row(), nodeToIndex(_bencode->child("info")));
         if (!_bencode->child("info")->childCount()) {
             removeRow(_bencode->child("info")->row(), nodeToIndex(_bencode));
@@ -132,7 +132,7 @@ QString BencodeModel::name() const
 
 void BencodeModel::setPrivateTorrent(bool privateTorrent)
 {
-    if (!privateTorrent && _bencode && _bencode->child("info") && _bencode->child("info")->child("private")) { // -V807 PVS-Studio
+    if (!privateTorrent && _bencode && _bencode->child("info") && _bencode->child("info")->child("private")) {
         removeRow(_bencode->child("info")->child("private")->row(), nodeToIndex(_bencode->child("info")));
         if (!_bencode->child("info")->childCount()) {
             removeRow(_bencode->child("info")->row(), nodeToIndex(_bencode));
@@ -235,7 +235,7 @@ QDateTime BencodeModel::creationTime() const
 
 void BencodeModel::setPieceSize(int pieceSize)
 {
-    if (!pieceSize && _bencode && _bencode->child("info") && _bencode->child("info")->child("piece length")) { // -V807 PVS-Studio
+    if (!pieceSize && _bencode && _bencode->child("info") && _bencode->child("info")->child("piece length")) {
         removeRow(_bencode->child("info")->child("piece length")->row(), nodeToIndex(_bencode->child("info")));
         if (!_bencode->child("info")->childCount()) {
             removeRow(_bencode->child("info")->row(), nodeToIndex(_bencode));
@@ -325,7 +325,7 @@ void BencodeModel::setTrackers(const QStringList &trackers)
         Bencode *item = new Bencode(fromUnicode(tracker));
         Bencode *parentItem = new Bencode(Bencode::Type::List);
         parentItem->appendChild(item);
-        _bencode->child("announce-list")->appendChild(parentItem); // -V595 // -V807 PVS-Studio
+        _bencode->child("announce-list")->appendChild(parentItem);
     }
 
     if (_bencode->child("announce-list") && !_bencode->child("announce-list")->children().isEmpty()) {

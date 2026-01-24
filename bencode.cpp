@@ -270,7 +270,7 @@ QString Bencode::toString() const
 {
     QString res;
     if (!_key.isEmpty()) {
-        res = QStringLiteral("key ") + QString::fromUtf8(_key) + QStringLiteral(" | "); // -V119 PVS-Studio
+        res = QStringLiteral("key ") + QString::fromUtf8(_key) + QStringLiteral(" | ");
     }
 
     switch (_type) {
@@ -388,7 +388,7 @@ Bencode *Bencode::parseList(const QByteArray &raw, int &pos)
         Q_ASSERT(item);
 
         // some error happens
-        if (!item || !item->isValid()) { // -V560 PVS-Studio
+        if (!item || !item->isValid()) {
             delete res;
             delete item;
             return new Bencode;
@@ -428,7 +428,7 @@ Bencode *Bencode::parseDictionary(const QByteArray &raw, int &pos)
         Q_ASSERT(value);
 
         // some error happens
-        if (!value || !value->isValid()) { // -V560 PVS-Studio
+        if (!value || !value->isValid()) {
             delete res;
             delete value;
             return new Bencode();

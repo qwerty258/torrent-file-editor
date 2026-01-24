@@ -1,7 +1,4 @@
 /*
- * This is an open source non-commercial project. Dear PVS-Studio, please check it.
- * PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
- *
  * -*- Mode: C++; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*-
  * vim:tabstop=4:shiftwidth=4:expandtab:
  *
@@ -269,7 +266,7 @@ struct new_ptr_list_t
 #else
     char            file[_DEBUG_NEW_FILENAME_LEN]; ///< File name of the caller
 #endif
-    void*           addr;       ///< Address of the caller to \e new // -V117 PVS-Studio
+    void*           addr;       ///< Address of the caller to \e new
     };
     unsigned        line   :31; ///< Line number of the caller; or \c 0
     unsigned        is_array:1; ///< Non-zero iff <em>new[]</em> is used
@@ -291,7 +288,7 @@ static const unsigned DEBUG_NEW_MAGIC = 0x4442474E;
 /**
  * The extra memory allocated by <code>operator new</code>.
  */
-static const int ALIGNED_LIST_ITEM_SIZE = ALIGN(sizeof(new_ptr_list_t));  // -V104 PVS-Studio
+static const int ALIGNED_LIST_ITEM_SIZE = ALIGN(sizeof(new_ptr_list_t));
 
 /**
  * List of all new'd pointers.
@@ -438,7 +435,7 @@ static bool print_position_from_addr(const void* addr)
 #else
         const char ignore_err[] = "";
 #endif
-        size_t cmd_len = strlen(module_name) // -V2007 PVS-Studio
+        size_t cmd_len = strlen(module_name)
                 + exeext_len
                 + sizeof(addr2line_cmd) - 1
                 + sizeof(ignore_err) - 1
@@ -468,7 +465,7 @@ static bool print_position_from_addr(const void* addr)
         sprintf(cmd + len, " -l %p", load_addr);
         len = strlen(cmd);
 #endif
-        sprintf(cmd + len, " %p%s", real_addr, ignore_err); // -V111 PVS-Studio
+        sprintf(cmd + len, " %p%s", real_addr, ignore_err);
         FILE* fp = popen(cmd, "r");
         if (fp)
         {
@@ -574,7 +571,7 @@ static void print_position(const void* ptr, int line)
     else if (ptr != _NULLPTR)  // Is caller address present?
     {
         if (!print_position_from_addr(ptr)) // Fail to get source position?
-            fprintf(new_output_fp, "%p", ptr); // -V111 PVS-Studio
+            fprintf(new_output_fp, "%p", ptr);
     }
     else                       // No information is present
     {
@@ -746,7 +743,7 @@ static void* alloc_mem(size_t size, const char* file, int line, bool is_array)
     if (new_verbose_flag)
     {
         fast_mutex_autolock lock(new_output_lock);
-        fprintf(new_output_fp, // -V111 PVS-Studio
+        fprintf(new_output_fp,
                 "new%s: allocated %p (size %zu, ",
                 is_array ? "[]" : "",
                 usr_ptr, size);
@@ -778,7 +775,7 @@ static void free_pointer(void* usr_ptr, void* addr, bool is_array)
     {
         {
             fast_mutex_autolock lock(new_output_lock);
-            fprintf(new_output_fp, "delete%s: invalid pointer %p (", // -V111 PVS-Studio
+            fprintf(new_output_fp, "delete%s: invalid pointer %p (",
                     is_array ? "[]" : "", usr_ptr);
             print_position(addr, 0);
             fprintf(new_output_fp, ")\n");
@@ -795,7 +792,7 @@ static void free_pointer(void* usr_ptr, void* addr, bool is_array)
         else
             msg = "delete after new[]";
         fast_mutex_autolock lock(new_output_lock);
-        fprintf(new_output_fp, // -V111 PVS-Studio
+        fprintf(new_output_fp,
                 "%s: pointer %p (size %zu)\n\tat ",
                 msg,
                 reinterpret_cast<char*>(ptr) + ALIGNED_LIST_ITEM_SIZE,
@@ -828,7 +825,7 @@ static void free_pointer(void* usr_ptr, void* addr, bool is_array)
     if (new_verbose_flag)
     {
         fast_mutex_autolock lock(new_output_lock);
-        fprintf(new_output_fp, // -V111 PVS-Studio
+        fprintf(new_output_fp,
                 "delete%s: freed %p (size %zu, %zu bytes still allocated)\n",
                 is_array ? "[]" : "",
                 reinterpret_cast<char*>(ptr) + ALIGNED_LIST_ITEM_SIZE,
@@ -859,7 +856,7 @@ size_t check_leaks()
         const char* const usr_ptr = reinterpret_cast<char*>(ptr) + ALIGNED_LIST_ITEM_SIZE;
         if (ptr->magic != DEBUG_NEW_MAGIC)
         {
-            fprintf(new_output_fp, // -V111 PVS-Studio
+            fprintf(new_output_fp,
                     "warning: heap data corrupt near %p\n",
                     usr_ptr);
         }
@@ -878,7 +875,7 @@ size_t check_leaks()
         }
         else
         {
-            fprintf(new_output_fp, // -V111 PVS-Studio
+            fprintf(new_output_fp,
                     "Leaked object at %p (size %zu, ",
                     usr_ptr,
                     ptr->size);
@@ -955,13 +952,13 @@ size_t check_leaks_summary()
             }
 
             if (summary_ptr != &summary_ptr_list) {
-                summary_ptr->count++; // -V127 PVS-Studio
+                summary_ptr->count++;
                 summary_ptr->size += ptr->size;
             }
             else
             {
                 summary_ptr = static_cast<new_ptr_list_t*>(malloc(sizeof(new_ptr_list_t)));
-                summary_ptr->size = ptr->size; // -V522 PVS-Studio
+                summary_ptr->size = ptr->size;
                 summary_ptr->addr = ptr->addr;
                 summary_ptr->is_array = ptr->is_array;
                 summary_ptr->line = ptr->line;
@@ -976,7 +973,7 @@ size_t check_leaks_summary()
 
                 summary_ptr->count = 1;
                 summary_ptr->prev = summary_ptr_list.prev;
-                summary_ptr->next = &summary_ptr_list; // -V506 PVS-Studio
+                summary_ptr->next = &summary_ptr_list;
                 summary_ptr_list.prev->next = summary_ptr;
                 summary_ptr_list.prev = summary_ptr;
             }
@@ -1069,7 +1066,7 @@ size_t check_mem_corruption()
         if (ptr->magic != DEBUG_NEW_MAGIC)
         {
 #endif
-            fprintf(new_output_fp, // -V111 PVS-Studio
+            fprintf(new_output_fp,
                     "Heap data corrupt near %p (size %zu, ",
                     usr_ptr,
                     ptr->size);
@@ -1116,7 +1113,7 @@ void debug_new_recorder::_M_process(void* usr_ptr)
     // In an expression `new NonPODType[size]', the pointer returned is
     // not the pointer returned by operator new[], but offset by size_t
     // to leave room for the size.  It needs to be compensated here.
-    size_t offset = (char*)usr_ptr - (char*)_NULLPTR; // -V2005 PVS-Studio
+    size_t offset = (char*)usr_ptr - (char*)_NULLPTR;
     if (offset % PLATFORM_MEM_ALIGNMENT != 0) {
         offset -= sizeof(size_t);
         if (offset % PLATFORM_MEM_ALIGNMENT != 0) {
@@ -1141,7 +1138,7 @@ void debug_new_recorder::_M_process(void* usr_ptr)
     }
     if (new_verbose_flag) {
         fast_mutex_autolock lock(new_output_lock);
-        fprintf(new_output_fp, // -V111 PVS-Studio
+        fprintf(new_output_fp,
                 "info: pointer %p allocated from %s:%d\n",
                 usr_ptr, _M_file, _M_line);
     }
@@ -1346,7 +1343,7 @@ void operator delete(void* ptr, const char* file, int line) _NOEXCEPT
     if (new_verbose_flag)
     {
         fast_mutex_autolock lock(new_output_lock);
-        fprintf(new_output_fp, // -V111 PVS-Studio
+        fprintf(new_output_fp,
                 "info: exception thrown on initializing object at %p (",
                 ptr);
         print_position(file, line);
@@ -1368,7 +1365,7 @@ void operator delete[](void* ptr, const char* file, int line) _NOEXCEPT
     if (new_verbose_flag)
     {
         fast_mutex_autolock lock(new_output_lock);
-        fprintf(new_output_fp, // -V111 PVS-Studio
+        fprintf(new_output_fp,
                 "info: exception thrown on initializing objects at %p (",
                 ptr);
         print_position(file, line);

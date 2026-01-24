@@ -118,7 +118,7 @@ public:
     inline T *sibling(int row) const
     {
         Q_ASSERT(_parent);
-        Q_ASSERT(row < _parent->childCount()); // -V595 PVS-Studio
+        Q_ASSERT(row < _parent->childCount());
         return _parent ? _parent->child(row) : nullptr;
     }
 

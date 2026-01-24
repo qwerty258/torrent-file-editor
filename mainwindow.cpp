@@ -101,7 +101,7 @@ void Worker::doWork(const QStringList &files, int pieceSize)
         }
 
         int readed;
-        while ((readed = f.read(piece.data() + piecePos, pieceSize - piecePos)) > 0) {  // -V104 PVS-Studio
+        while ((readed = f.read(piece.data() + piecePos, pieceSize - piecePos)) > 0) {
             piecePos += readed;
             if (piecePos == pieceSize || ((i == files.size() - 1) && f.atEnd())) {
                 piece.resize(piecePos);
@@ -213,11 +213,11 @@ MainWindow::MainWindow(QWidget *parent)
     QStringList headers;
     headers << QString() << QString() << QString() << QString() /* dummy */;
     model->setHorizontalHeaderLabels(headers);
-    model->horizontalHeaderItem(0)->setTextAlignment(Qt::AlignLeft); // -V525 PVS-Studio
+    model->horizontalHeaderItem(0)->setTextAlignment(Qt::AlignLeft);
     model->horizontalHeaderItem(1)->setTextAlignment(Qt::AlignRight);
     model->horizontalHeaderItem(2)->setTextAlignment(Qt::AlignRight);
     ui->viewFiles->setModel(model);
-    ui->viewFiles->horizontalHeader()->setHighlightSections(false); // -V807 PVS-Studio
+    ui->viewFiles->horizontalHeader()->setHighlightSections(false);
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     ui->viewFiles->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
     ui->viewFiles->horizontalHeader()->setSectionsMovable(false);
@@ -244,7 +244,7 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
 
     ui->btnNew->setIcon(QIcon::fromTheme(QStringLiteral("text-x-generic")));
-    ui->btnOpen->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogOpenButton)); // -V807 PVS-Studio
+    ui->btnOpen->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogOpenButton));
     ui->btnSave->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogSaveButton));
     ui->btnSaveAs->setIcon(qApp->style()->standardIcon(QStyle::SP_DialogSaveButton));
 
@@ -380,7 +380,7 @@ void MainWindow::create()
 
     _bencodeModel->setRaw("");
     _bencodeModel->resetModified();
-    _fileName = QString(); // -V815 PVS-Studio
+    _fileName = QString();
     updateTitle();
     updateTab(ui->tabWidget->currentIndex());
 
@@ -505,7 +505,7 @@ void MainWindow::dragEnterEvent(QDragEnterEvent *event)
     }
 }
 
-void MainWindow::dropEvent(QDropEvent *event) // -V2009 PVS-Studio
+void MainWindow::dropEvent(QDropEvent *event)
 {
     QList<QUrl> urls = event->mimeData()->urls();
     if (!urls.isEmpty() && urls.first().isLocalFile()) {
@@ -565,10 +565,10 @@ void MainWindow::fillCoding()
         QRegularExpressionMatch iso8859RegExpMatch = iso8859RegExp.match(sortKey);
 #endif
         if (sortKey.startsWith(QLatin1String("UTF-8"))) {
-            rank = 1; // -V112 PVS-Studio
+            rank = 1;
         }
         else if (sortKey.startsWith(QLatin1String("UTF-16"))) {
-            rank = 2; // -V112 PVS-Studio
+            rank = 2;
         }
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         else if (iso8859RegExpMatch.hasMatch()) {
@@ -577,14 +577,14 @@ void MainWindow::fillCoding()
         else if (iso8859RegExp.exactMatch(sortKey)) {
             if (iso8859RegExp.cap(1).size() == 1) {
 #endif
-                rank = 3; // -V112 PVS-Studio
+                rank = 3;
             }
             else {
-                rank = 4; // -V112 PVS-Studio
+                rank = 4;
             }
         }
         else {
-            rank = 5; // -V112 PVS-Studio
+            rank = 5;
         }
         sortKey.prepend(QChar('0' + rank));
         codecMap.insert(sortKey, codec);
@@ -1278,7 +1278,7 @@ void MainWindow::addFilesRow(const QString &path, qulonglong size)
     QList<QStandardItem*> list;
     list << new QStandardItem(QDir::toNativeSeparators(path));
     list << new QStandardItem(smartSize(size));
-    list.last()->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter); // -V807 PVS-Studio
+    list.last()->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
     list.last()->setData(size);
     list << new QStandardItem();
     list.last()->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -1315,7 +1315,7 @@ QString MainWindow::smartSize(qulonglong size)
         i++;
     }
 
-    QString res = QLocale::system().toString(kb, 'g', 4); // -V112 PVS-Studio
+    QString res = QLocale::system().toString(kb, 'g', 4);
 
     // Drop zeroes
     while (res.contains(QLocale::system().decimalPoint()) && res.right(1) == QLatin1String("0"))

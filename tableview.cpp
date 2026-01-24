@@ -105,7 +105,7 @@ void TableView::copyWoExt()
     }
 }
 
-QModelIndex TableView::moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers) // -V813 PVS-Studio
+QModelIndex TableView::moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers)
 {
 
     switch (cursorAction) {
