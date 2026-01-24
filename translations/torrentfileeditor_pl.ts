@@ -697,6 +697,7 @@ Do you want to set torrent root folder and try again?</translation>
         <numerusform>%1 z %n dopasowań</numerusform>
         <numerusform>%1 z %n dopasowań</numerusform>
         <numerusform>%1 z %n dopasowań</numerusform>
+        <numerusform>%1 z %n dopasowań</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -704,6 +705,7 @@ Do you want to set torrent root folder and try again?</translation>
       <source>%n value(s) was(were) replaced</source>
       <translatorcomment>Do not touch %n it must be as is. Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
       <translation>
+        <numerusform>%n wartość(wartości) została(zostały) podmieniona(podmienione)</numerusform>
         <numerusform>%n wartość(wartości) została(zostały) podmieniona(podmienione)</numerusform>
         <numerusform>%n wartość(wartości) została(zostały) podmieniona(podmienione)</numerusform>
         <numerusform>%n wartość(wartości) została(zostały) podmieniona(podmienione)</numerusform>

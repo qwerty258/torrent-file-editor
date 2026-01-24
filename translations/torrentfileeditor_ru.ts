@@ -697,6 +697,7 @@ Do you want to set torrent root folder and try again?</source>
         <numerusform>%1 из %n совпадения</numerusform>
         <numerusform>%1 из %n совпадений</numerusform>
         <numerusform>%1 из %n совпадений</numerusform>
+        <numerusform>%1 из %n совпадений</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -706,6 +707,7 @@ Do you want to set torrent root folder and try again?</source>
       <translation>
         <numerusform>%n значение заменено</numerusform>
         <numerusform>%n значения заменено</numerusform>
+        <numerusform>%n значений заменено</numerusform>
         <numerusform>%n значений заменено</numerusform>
       </translation>
     </message>

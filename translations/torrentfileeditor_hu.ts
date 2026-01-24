@@ -695,6 +695,7 @@ Szeretnéd beállítani a torrent gyökérkönyvtárat és újrapróbálni?</tra
       <translatorcomment>Do not touch %1 it must be as is. Make translations for both singular and plural forms. </translatorcomment>
       <translation>
         <numerusform>%1 egyezés %n-ból/ből</numerusform>
+        <numerusform>%1 egyezés %n-ból/ből</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -703,6 +704,7 @@ Szeretnéd beállítani a torrent gyökérkönyvtárat és újrapróbálni?</tra
       <translatorcomment>Do not touch %n it must be as is. Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
       <translation>
         <numerusform>%n érték lecserélve</numerusform>
+        <numerusform>%n érték(ek) tárgyát cserélni</numerusform>
       </translation>
     </message>
   </context>

@@ -13,7 +13,7 @@
       <location filename="../aboutdlg.ui" line="39"/>
       <source>&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</source>
       <translatorcomment>Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
-      <translation type="unfinished">&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</translation>
+      <translation>&lt;h3&gt;Káva pro vývojáře&lt;/h3&gt;</translation>
     </message>
     <message>
       <location filename="../aboutdlg.ui" line="104"/>
@@ -161,7 +161,7 @@
     <message>
       <location filename="../mainwindow.ui" line="219"/>
       <source>URL</source>
-      <translation type="unfinished">URL</translation>
+      <translation>URL</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="226"/>
@@ -176,7 +176,7 @@
     <message>
       <location filename="../mainwindow.ui" line="314"/>
       <source>Magnet link</source>
-      <translation type="unfinished">Magnet link</translation>
+      <translation>Magnet link</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="368"/>
@@ -221,7 +221,7 @@
     <message>
       <location filename="../mainwindow.ui" line="540"/>
       <source>Filter by </source>
-      <translation>Filtrováno</translation>
+      <translation>Filtrovat</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="547"/>
@@ -262,12 +262,12 @@
     <message>
       <location filename="../mainwindow.ui" line="566"/>
       <source>name</source>
-      <translation>Název</translation>
+      <translation>dle názvu</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="571"/>
       <source>extension</source>
-      <translation>Přípona</translation>
+      <translation>dle přípony</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="576"/>
@@ -631,7 +631,7 @@ Do you want to set torrent root folder and try again?</translation>
     <message>
       <location filename="../searchdlg.ui" line="127"/>
       <source>Hex</source>
-      <translation type="unfinished">Hex</translation>
+      <translation>Hex</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="154"/>
@@ -697,6 +697,7 @@ Do you want to set torrent root folder and try again?</translation>
         <numerusform>%1 z %n shody</numerusform>
         <numerusform>%1 z %n shod</numerusform>
         <numerusform>%1 z %n shod</numerusform>
+        <numerusform>%1 z %n shod</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -707,6 +708,7 @@ Do you want to set torrent root folder and try again?</translation>
         <numerusform>%n hodnota byla nahrazena</numerusform>
         <numerusform>%n hodnoty byly nahrazeny</numerusform>
         <numerusform>%n hodnot bylo nahrazeno</numerusform>
+        <numerusform>%n hodnot bylo nahrazeno</numerusform>
       </translation>
     </message>
   </context>
@@ -716,18 +718,18 @@ Do you want to set torrent root folder and try again?</translation>
       <location filename="../tableview.cpp" line="58"/>
       <location filename="../tableview.cpp" line="181"/>
       <source>Copy with Size</source>
-      <translation type="unfinished">Copy with Size</translation>
+      <translation>Kopírovat s Velikostí</translation>
     </message>
     <message>
       <location filename="../tableview.cpp" line="64"/>
       <location filename="../tableview.cpp" line="182"/>
       <source>Copy Filename</source>
-      <translation type="unfinished">Copy Filename</translation>
+      <translation>Kopírovat Název souboru</translation>
     </message>
     <message>
       <location filename="../tableview.cpp" line="180"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>Kopírovat</translation>
     </message>
   </context>
   <context>
@@ -735,7 +737,7 @@ Do you want to set torrent root folder and try again?</translation>
     <message>
       <location filename="../urledit.cpp" line="82"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>Kopírovat</translation>
     </message>
     <message>
       <location filename="../urledit.cpp" line="83"/>

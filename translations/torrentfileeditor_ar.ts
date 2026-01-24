@@ -7,18 +7,18 @@
       <location filename="../aboutdlg.ui" line="162"/>
       <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Author: Ivan Romanov &lt;a href="mailto:drizt72@zoho.eu"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;drizt72@zoho.eu&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;License: GNU General Public License v3.0 or later&lt;/p&gt;&lt;p&gt;Home Page: &lt;a href="https://torrent-file-editor.github.io"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;https://torrent-file-editor.github.io&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Sources: &lt;a href="https://github.com/torrent-file-editor/torrent-file-editor"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;https://github.com/torrent-file-editor/torrent-file-editor&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Thanks to &lt;a href="https://rutracker.org/forum/profile.php?mode=viewprofile&amp;amp;u=8465051"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;ALEX Krays&lt;/span&gt;&lt;/a&gt; for application icon&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
       <translatorcomment>Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
-      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir="rtl"&gt;المبرمج: إيڤان رومانوڤ &lt;a href="mailto:drizt72@zoho.eu"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;drizt72@zoho.eu&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;/p&gt;&lt;p dir="rtl"&gt;موقع البرنامج الرئيسي: &lt;a href="https://torrent-file-editor.github.io"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;https://torrent-file-editor.github.io&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p dir="rtl"&gt;الكود: &lt;a href="https://github.com/torrent-file-editor/torrent-file-editor"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;https://github.com/torrent-file-editor/torrent-file-editor&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p dir="rtl"&gt; شكرا لـ &lt;a href="https://rutracker.org/forum/profile.php?mode=viewprofile&amp;amp;u=8465051"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;أليكس كرايز&lt;/span&gt;&lt;/a&gt; لصنعه أيقونة البرنامج &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+      <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p dir="rtl"&gt;المبرمج: إيڤان رومانوڤ &lt;a href="mailto:drizt72@zoho.eu"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;drizt72@zoho.eu&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p&gt;الترخيص: GNU General Public License v3.0 أو أحدث&lt;/p&gt;&lt;p dir="rtl"&gt;الموقع الرئيسي: &lt;a href="https://torrent-file-editor.github.io"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;https://torrent-file-editor.github.io&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p dir="rtl"&gt;كود المصدر: &lt;a href="https://github.com/torrent-file-editor/torrent-file-editor"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;https://github.com/torrent-file-editor/torrent-file-editor&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;p dir="rtl"&gt; شكرا لـ &lt;a href="https://rutracker.org/forum/profile.php?mode=viewprofile&amp;amp;u=8465051"&gt;&lt;span style=" text-decoration: underline; color:#0057ae;"&gt;أليكس كرايز&lt;/span&gt;&lt;/a&gt; لصنعه أيقونة البرنامج &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
       <location filename="../aboutdlg.ui" line="39"/>
       <source>&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</source>
       <translatorcomment>Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
-      <translation type="unfinished">&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</translation>
+      <translation>&lt;h3&gt;كوب قهوة للمطور&lt;/h3&gt;</translation>
     </message>
     <message>
       <location filename="../aboutdlg.ui" line="104"/>
       <source>Check for Update</source>
-      <translation>ابحث عن تحديثات</translation>
+      <translation>البحث عن تحديثات</translation>
     </message>
     <message>
       <location filename="../aboutdlg.cpp" line="167"/>
@@ -35,12 +35,12 @@
       <location filename="../aboutdlg.cpp" line="226"/>
       <source>New version &lt;a href="%2"&gt;%1&lt;/a&gt; has been detected</source>
       <translatorcomment>Do not touch %1 it must be as is. Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
-      <translation>هناك إصدار جديد &lt;a href="%2"&gt;%1&lt;/a&gt;</translation>
+      <translation>هناك إصدار جديد &lt;a href="%2"&gt;%1&lt;/a&gt; تم رصده</translation>
     </message>
     <message>
       <location filename="../aboutdlg.cpp" line="229"/>
       <source>The latest version is installed</source>
-      <translation>لديك أحدث إصدار من البرنامج</translation>
+      <translation>الإصدار الأحدث مثبت</translation>
     </message>
   </context>
   <context>
@@ -48,7 +48,7 @@
     <message>
       <location filename="../bencodemodel.cpp" line="770"/>
       <source>Name</source>
-      <translation>الاسم</translation>
+      <translation>الإسم</translation>
     </message>
     <message>
       <location filename="../bencodemodel.cpp" line="771"/>
@@ -76,7 +76,7 @@
     <message>
       <location filename="../datewidget.cpp" line="154"/>
       <source>Show calendar</source>
-      <translation>إظهار التقويم</translation>
+      <translation>عرض التقويم</translation>
     </message>
   </context>
   <context>
@@ -98,7 +98,7 @@
       <location filename="../mainwindow.ui" line="30"/>
       <location filename="../mainwindow.ui" line="912"/>
       <source>New</source>
-      <translation>البدء من جديد</translation>
+      <translation>جديد</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="37"/>
@@ -121,7 +121,7 @@
     <message>
       <location filename="../mainwindow.ui" line="91"/>
       <source>About</source>
-      <translation>عن البرنامج</translation>
+      <translation>حول البرنامج</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="104"/>
@@ -131,12 +131,12 @@
     <message>
       <location filename="../mainwindow.ui" line="192"/>
       <source>Pieces</source>
-      <translation>عدد القطع</translation>
+      <translation>الأجزاء</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="151"/>
       <source>Created by</source>
-      <translation>أنشئ بواسطة</translation>
+      <translation>أنشئ من طرف:</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="212"/>
@@ -161,7 +161,7 @@
     <message>
       <location filename="../mainwindow.ui" line="219"/>
       <source>URL</source>
-      <translation>عنوان URL</translation>
+      <translation>عنوان الرابط</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="226"/>
@@ -176,17 +176,17 @@
     <message>
       <location filename="../mainwindow.ui" line="314"/>
       <source>Magnet link</source>
-      <translation>رابط الماجنت</translation>
+      <translation>الرابط المغناطيسي</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="368"/>
       <source>Comment</source>
-      <translation>ملاحظة</translation>
+      <translation>تعليق</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="386"/>
       <source>Trackers</source>
-      <translation>التراكر</translation>
+      <translation>التراكرز</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="406"/>
@@ -249,14 +249,14 @@
 &lt;p style="margin-left: 20px"&gt;اسم الملف متضمنا الامتداد&lt;/p&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;b&gt;الامتداد&lt;/b&gt;&lt;/p&gt;
-&lt;p style="margin-left: 20px"&gt;اكتب الأحرف بعد آخر نقطة في اسم الملف ، فمثلا بالنسبة لـ "archive.tar.gz" امتداده هو "gz" 
+&lt;p style="margin-left: 20px"&gt;الرموز بعد آخر نقطة في اسم الملف ، فمثلا بالنسبة لـ "archive.tar.gz" امتداده هو "gz" 
 &lt;/p&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;b&gt;نجوم&lt;/b&gt;&lt;/p&gt;
 &lt;p style="margin-left: 20px"&gt;اسم الملف متضمنا الامتداد حيث "?" يحل محل حرف واحد و "*" يحل محل أي عدد من الأحرف والأرقام&lt;/p&gt;
 &lt;br/&gt;
 &lt;p&gt;&lt;b&gt;التعبير النمطي&lt;/b&gt;&lt;/p&gt;
-&lt;p style="margin-left: 20px"&gt;تعابير نمطية مثل تعابير لغة بيرل&lt;/p&gt;
+&lt;p style="margin-left: 20px"&gt;المسار الكامل لملف يطابق التعبير النمطي للغة البيرل&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;</translation>
     </message>
@@ -288,7 +288,7 @@
     <message>
       <location filename="../mainwindow.ui" line="694"/>
       <source>Torrent root folder </source>
-      <translation>مسار الملفات </translation>
+      <translation>مجلد الجذر للتورنت</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="707"/>
@@ -313,12 +313,12 @@
     <message>
       <location filename="../mainwindow.ui" line="782"/>
       <source>Find</source>
-      <translation>البحث</translation>
+      <translation>بحث</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="798"/>
       <source>Replace</source>
-      <translation>بحث واستبدال</translation>
+      <translation>إستبدال</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="900"/>
@@ -333,7 +333,7 @@
     <message>
       <location filename="../mainwindow.ui" line="920"/>
       <source>Open...</source>
-      <translation>افتح...</translation>
+      <translation>فتح...</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="923"/>
@@ -348,7 +348,7 @@
     <message>
       <location filename="../mainwindow.ui" line="936"/>
       <source>Save As...</source>
-      <translation>حفظ باسم...</translation>
+      <translation>حفظ بإسم...</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="939"/>
@@ -368,7 +368,7 @@
     <message>
       <location filename="../mainwindow.ui" line="417"/>
       <source>Calculate pieces hashes</source>
-      <translation>احسب هاشات القطع</translation>
+      <translation>حساب هاشات الأجزاء</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="488"/>
@@ -389,7 +389,7 @@
     <message>
       <location filename="../mainwindow.ui" line="734"/>
       <source>Delete selected tree items</source>
-      <translation>مسح المحدد من الشجرة</translation>
+      <translation>حذف عناصر الشجرة المحددة</translation>
     </message>
     <message>
       <location filename="../mainwindow.ui" line="834"/>
@@ -404,12 +404,12 @@
     <message>
       <location filename="../mainwindow.cpp" line="208"/>
       <source>Please wait</source>
-      <translation>يُرجى الانتظار</translation>
+      <translation>يُرجى الإنتظار</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1405"/>
       <source>Auto</source>
-      <translation>تلقائيا</translation>
+      <translation>تلقائي</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1409"/>
@@ -434,7 +434,7 @@
     <message>
       <location filename="../mainwindow.cpp" line="1409"/>
       <source># Pieces</source>
-      <translation>عدد القطع#</translation>
+      <translation>الأجزاء</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="417"/>
@@ -457,7 +457,7 @@
     <message>
       <location filename="../mainwindow.cpp" line="721"/>
       <source>Torrent root folder is not set</source>
-      <translation>لم يتم تحديد مسار الملفات</translation>
+      <translation>لم يتم تعيين مجلد جذر تورنت</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="460"/>
@@ -471,7 +471,7 @@
       <location filename="../mainwindow.cpp" line="460"/>
       <location filename="../mainwindow.cpp" line="1230"/>
       <source>BEncoded data is not valid</source>
-      <translation>بيانات البي إنكود غير صالحة</translation>
+      <translation>بيانات الـ BEncoed غير صالحة</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="722"/>
@@ -480,24 +480,25 @@
 If you want to edit file list in the current torrent you need to set torrent root folder. The torrent root folder is a folder where all files can be located on the disk. Actual file path on the disk is torrent root folder with relative path from torrent file. If something files are missing then torrent can't be generated.
 
 Do you want to set torrent root folder and try again?</source>
-      <translation>مسار الملفات غير معروف. يمكنك إنشاء التورنت فقط إذا امتلكت الملفات كاملة.
-إن كنت تريد تعديل قائمة الملفات في هذا التورنت لا بد من تحديد مسار الملفات ، أي مكان الملفات الموجودة بهذا التورنت على الكمبيوتر الخاص بك. إن كنت لا تملك الملفات فلا يمكنك إنشاء هذا التورنت.
-أتريد تحديد مسار الملفات والمحاولة مرة أخرى؟</translation>
+      <translation>مسار الملفات غير معروف. يمكنك إنشاء التورنت فقط إذا امتلكت الملفات المحملة كاملة.
+إن كنت تريد تعديل قائمة الملفات في هذا التورنت لا بد من تعيين مسار مجلد جدر التورنت.
+مجلد جدر التورنت هو مكان الملفات الموجودة بهذا التورنت على القرص الصلب. المسار الفعلي للملف على القرص هو مجلد جذر التورنت مع المسار النسبي لملف التورنت. إذا كانت هناك ملفات مفقودة، عندها ملف التورنت لن يمكن إنشاء .
+هل تريد تعيين مجلد جدر التورنت والمحاولة مرة أخرى؟</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="743"/>
       <source>The filesystem root can't be used as a torrent root folder.</source>
-      <translation>لا يمكن اختيار الأصل كمسار للملفات</translation>
+      <translation>لا يمكن استخدام جذر ملفات نظام التشغيل  كمجلد جذر للتورنت.</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="747"/>
       <source>The torrent root folder is not set.</source>
-      <translation>لم يتم تحديد مسار الملفات</translation>
+      <translation>لم يتم تعيين مجلد جدر التورنت</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="757"/>
       <source>The torrent root folder is not common.</source>
-      <translation>للملفات مسارات مختلفة.</translation>
+      <translation>مجلد جذر التورنت ليس مشترك.</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="816"/>
@@ -513,38 +514,38 @@ Do you want to set torrent root folder and try again?</source>
       <location filename="../mainwindow.cpp" line="983"/>
       <source>Line: %1 of %2 Col: %3</source>
       <translatorcomment>Do not touch %1 it must be as is.</translatorcomment>
-      <translation>الصف الـ %1 من أصل %2 العمود الـ %3</translation>
+      <translation>الصف %1 من %2 العمود %3</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1205"/>
       <source>Error on %1 line: %2</source>
       <translatorcomment>Do not touch %1 it must be as is.</translatorcomment>
-      <translation>خطأ في السطر الـ %1: %2</translation>
+      <translation>خطأ في %1 السطر: %2</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1346"/>
       <source>B</source>
-      <translation>بايت</translation>
+      <translation>B</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1350"/>
       <source>KiB</source>
-      <translation>كيلوبايت</translation>
+      <translation>KiB</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1354"/>
       <source>MiB</source>
-      <translation>ميجا بايت</translation>
+      <translation>MiB</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1358"/>
       <source>GiB</source>
-      <translation>جيجا بايت</translation>
+      <translation>GiB</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1362"/>
       <source>TiB</source>
-      <translation>تيرا بايت</translation>
+      <translation>TiB</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1380"/>
@@ -554,7 +555,7 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../mainwindow.cpp" line="1381"/>
       <source>Untitled</source>
-      <translation>بلا اسم</translation>
+      <translation>بدون عنوان</translation>
     </message>
     <message>
       <location filename="../mainwindow.cpp" line="1382"/>
@@ -568,7 +569,7 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../bencode.cpp" line="219"/>
       <source>list</source>
-      <translation>قائمة</translation>
+      <translation>القائمة</translation>
     </message>
     <message>
       <location filename="../bencode.cpp" line="220"/>
@@ -583,7 +584,7 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../bencode.cpp" line="222"/>
       <source>string</source>
-      <translation>خيط</translation>
+      <translation>سلسلة حرفية</translation>
     </message>
     <message>
       <location filename="../bencode.cpp" line="223"/>
@@ -596,13 +597,13 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../searchdlg.ui" line="27"/>
       <source>Key</source>
-      <translation>النوع</translation>
+      <translation>مفتاح</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="39"/>
       <location filename="../searchdlg.ui" line="96"/>
       <source>Match case</source>
-      <translation>مراعاة حجم الحرف</translation>
+      <translation>طابق حالة الأحرف</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="46"/>
@@ -630,17 +631,17 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../searchdlg.ui" line="127"/>
       <source>Hex</source>
-      <translation>Hex</translation>
+      <translation>كود Hex</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="154"/>
       <source>Replace value with</source>
-      <translation>إستبدال بـ</translation>
+      <translation>استبدال القيمة بـ</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="164"/>
       <source>hex</source>
-      <translation>Hex</translation>
+      <translation>كود Hex</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="176"/>
@@ -660,18 +661,18 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../searchdlg.ui" line="204"/>
       <source>Replace All</source>
-      <translation>استبدل الكلّ</translation>
+      <translation>إستبدال الكل</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="224"/>
       <source>Find Next</source>
-      <translation>إبحث عن التالي</translation>
+      <translation>البحث عن التالي</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="248"/>
       <location filename="../searchdlg.cpp" line="63"/>
       <source>Replace</source>
-      <translation>بحث واستبدال</translation>
+      <translation>إستبدال</translation>
     </message>
     <message>
       <location filename="../searchdlg.ui" line="231"/>
@@ -732,7 +733,7 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../tableview.cpp" line="180"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>نسخ</translation>
     </message>
   </context>
   <context>
@@ -740,7 +741,7 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../urledit.cpp" line="82"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>النسخ</translation>
     </message>
     <message>
       <location filename="../urledit.cpp" line="83"/>

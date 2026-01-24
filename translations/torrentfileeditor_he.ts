@@ -688,6 +688,8 @@ Do you want to set torrent root folder and try again?</source>
       <translation>
         <numerusform>% 1 מתוך% n ההתאמות</numerusform>
         <numerusform>% 1 מתוך% n ההתאמות</numerusform>
+        <numerusform>%d %d התאמות</numerusform>
+        <numerusform>%d %d התאמות</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -697,6 +699,8 @@ Do you want to set torrent root folder and try again?</source>
       <translation>
         <numerusform>% n ערכים (הוחלפו)</numerusform>
         <numerusform>% n ערכים (הוחלפו)</numerusform>
+        <numerusform>%n was(were) (ים) הוחלף</numerusform>
+        <numerusform>%n was(were) (ים) הוחלף</numerusform>
       </translation>
     </message>
   </context>

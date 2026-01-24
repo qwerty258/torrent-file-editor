@@ -13,7 +13,7 @@
       <location filename="../aboutdlg.ui" line="39"/>
       <source>&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</source>
       <translatorcomment>Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
-      <translation type="unfinished">&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</translation>
+      <translation>&lt;h3&gt;Кава для розробника&lt;/h3&gt;</translation>
     </message>
     <message>
       <location filename="../aboutdlg.ui" line="104"/>
@@ -693,6 +693,7 @@ Do you want to set torrent root folder and try again?</source>
         <numerusform>%1 of %n match(es)</numerusform>
         <numerusform>%1 of %n match(es)</numerusform>
         <numerusform>%1 of %n match(es)</numerusform>
+        <numerusform>%1 of %n match(es)</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -702,6 +703,7 @@ Do you want to set torrent root folder and try again?</source>
       <translation>
         <numerusform>%n значення було замінено</numerusform>
         <numerusform>%n значення було замінено</numerusform>
+        <numerusform>%n значення були замінені</numerusform>
         <numerusform>%n значення були замінені</numerusform>
       </translation>
     </message>
@@ -718,12 +720,12 @@ Do you want to set torrent root folder and try again?</source>
       <location filename="../tableview.cpp" line="64"/>
       <location filename="../tableview.cpp" line="182"/>
       <source>Copy Filename</source>
-      <translation type="unfinished">Copy Filename</translation>
+      <translation>Копіювати ім'я файлу</translation>
     </message>
     <message>
       <location filename="../tableview.cpp" line="180"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>Копіювати</translation>
     </message>
   </context>
   <context>
@@ -731,7 +733,7 @@ Do you want to set torrent root folder and try again?</source>
     <message>
       <location filename="../urledit.cpp" line="82"/>
       <source>Copy</source>
-      <translation type="unfinished">Copy</translation>
+      <translation>Копіювати</translation>
     </message>
     <message>
       <location filename="../urledit.cpp" line="83"/>

@@ -13,7 +13,7 @@
       <location filename="../aboutdlg.ui" line="39"/>
       <source>&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</source>
       <translatorcomment>Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
-      <translation type="unfinished">&lt;h3&gt;Coffee for Developer&lt;/h3&gt;</translation>
+      <translation/>
     </message>
     <message>
       <location filename="../aboutdlg.ui" line="104"/>
@@ -695,6 +695,7 @@ Torrent kök dizinini ayarlamak ve tekrar denemek istiyor musunuz?</translation>
       <translatorcomment>Do not touch %1 it must be as is. Make translations for both singular and plural forms. </translatorcomment>
       <translation>
         <numerusform>%1/%n eşleşme</numerusform>
+        <numerusform>%1/%n eşleşme</numerusform>
       </translation>
     </message>
     <message numerus="yes">
@@ -702,6 +703,7 @@ Torrent kök dizinini ayarlamak ve tekrar denemek istiyor musunuz?</translation>
       <source>%n value(s) was(were) replaced</source>
       <translatorcomment>Do not touch %n it must be as is. Do not touch HTML tags. It must be as is. Also check that autocorrection is disabled in your editor. Be care with trailing and leading spaces.</translatorcomment>
       <translation>
+        <numerusform>%n değer değiştirildi</numerusform>
         <numerusform>%n değer değiştirildi</numerusform>
       </translation>
     </message>
