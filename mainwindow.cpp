@@ -1238,6 +1238,9 @@ qulonglong MainWindow::autoPieceSize() const
                 break;
         }
     }
+
+    Q_ASSERT(pieceSize > 0);
+
     return pieceSize;
 }
 

@@ -113,7 +113,7 @@ void SearchDlg::searchNext()
             } else if (ui->rdValueHex->isChecked()) {
                 matchFlags |= Qt::MatchFlag::MatchContains;
                 matchFlags &= ~Qt::MatchFlag::MatchCaseSensitive;
-                role = static_cast<Qt::ItemDataRole>(Qt::UserRole + 1);
+                role = static_cast<Qt::ItemDataRole>(Qt::UserRole + 1); // NOLINT(clang-analyzer-optin.core.EnumCastOutOfRange)
             }
 
             values = _model->match(_model->index(0, 0), role, value, -1, matchFlags);

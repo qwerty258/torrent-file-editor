@@ -18,7 +18,7 @@ Application::Application(int &argc, char **argv)
 
     setStyle(new ProxyStyle());
 
-    if (QIcon::themeName().isEmpty()) {
+    if (QIcon::themeName().isEmpty()) { // NOLINT(clang-analyzer-cplusplus.NewDeleteLeaks)
         QIcon::setThemeName(QStringLiteral("gnome"));
     }
 }
