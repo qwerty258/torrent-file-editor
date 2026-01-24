@@ -1,3 +1,8 @@
+<!--
+SPDX-FileCopyrightText: NONE
+SPDX-License-Identifier: CC0-1.0
+-->
+
 [![Crowdin](https://d322cqt584bo4o.cloudfront.net/torrent-file-editor/localized.svg)](https://crowdin.com/project/torrent-file-editor)
 [![Version](https://badge.fury.io/gh/torrent-file-editor%2Ftorrent-file-editor.svg)](https://badge.fury.io/gh/torrent-file-editor%2Ftorrent-file-editor)
 
