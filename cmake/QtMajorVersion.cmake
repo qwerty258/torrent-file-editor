@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2023, 2026 Ivan Romanov <drizt72@zoho.eu>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 # Get Qt version from QT*_BUILD var
 foreach(v 4 5 6)
     if (QT${v}_BUILD)

@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2014-2020, 2023-2024, 2026 Ivan Romanov <drizt72@zoho.eu>
+# SPDX-FileContributor: 2022 Daniel <daniel.d.k.1994@gmail.com>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 cmake_minimum_required(VERSION 3.5)
 
 include(cmake/QtMajorVersion.cmake)

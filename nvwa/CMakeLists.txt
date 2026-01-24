@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2017, 2026 Ivan Romanov <drizt72@zoho.eu>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 set(SOURCES
     debug_new.cpp
 )

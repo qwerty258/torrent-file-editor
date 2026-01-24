@@ -1,5 +1,8 @@
 #!/usr/bin/bash
 
+# SPDX-FileCopyrightText: 2018, 2023, 2026 Ivan Romanov <drizt72@zoho.eu>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 set -x
 set -e
 

@@ -1,3 +1,6 @@
+-- SPDX-FileCopyrightText: 2016-2018, 2026 Ivan Romanov <drizt72@zoho.eu>
+-- SPDX-License-Identifier: GPL-3.0-or-later
+
 on run argv
   set image_name to item 1 of argv
 

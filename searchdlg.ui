@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+SPDX-FileCopyrightText: 2016, 2026 Ivan Romanov <drizt72@zoho.eu>
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
 <ui version="4.0">
  <class>SearchDlg</class>
  <widget class="QDialog" name="SearchDlg">

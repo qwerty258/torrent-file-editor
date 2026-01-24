@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2019, 2023, 2026 Ivan Romanov <drizt72@zoho.eu>
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 set(ENV{LC_ALL} C)
 execute_process(COMMAND date "+%a, %d %b %Y %H:%M:%S %z" OUTPUT_VARIABLE PUB_DATE OUTPUT_STRIP_TRAILING_WHITESPACE)
 execute_process(COMMAND osascript -e "tell application \"Finder\" to eject (every disk whose displayed name is \"${PROJECT_NAME}\")")
