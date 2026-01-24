@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2015-2018, 2023, 2026 Ivan Romanov <drizt72@zoho.eu>
+// SPDX-FileCopyrightText: 2015, 2017, 2026 Ivan Romanov <drizt72@zoho.eu>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "proxystyle.h"

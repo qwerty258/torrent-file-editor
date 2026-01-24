@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2016-2020, 2026 Ivan Romanov <drizt72@zoho.eu>
+// SPDX-FileCopyrightText: 2016-2017, 2023, 2026 Ivan Romanov <drizt72@zoho.eu>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #pragma once
