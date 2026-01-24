@@ -2,8 +2,8 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "bencodedelegate.h"
-#include "bencodemodel.h"
 #include "bencode.h"
+#include "bencodemodel.h"
 #include "combobox.h"
 
 #include <QEvent>
@@ -36,8 +36,8 @@ void BencodeDelegate::setEditorData(QWidget *editor, const QModelIndex &index) c
     if (static_cast<BencodeModel::Column>(index.column()) != BencodeModel::Column::Type)
         return QStyledItemDelegate::setEditorData(editor, index);
 
-    QComboBox *comboBox = qobject_cast<QComboBox*>(editor);
-    int type = static_cast<int>(static_cast<Bencode*>(index.internalPointer())->type());
+    QComboBox *comboBox = qobject_cast<QComboBox *>(editor);
+    int type = static_cast<int>(static_cast<Bencode *>(index.internalPointer())->type());
     comboBox->setCurrentIndex(comboBox->findData(type));
 }
 
@@ -46,9 +46,9 @@ void BencodeDelegate::setModelData(QWidget *editor, QAbstractItemModel *model, c
     if (static_cast<BencodeModel::Column>(index.column()) != BencodeModel::Column::Type)
         return QStyledItemDelegate::setModelData(editor, model, index);
 
-    QComboBox *comboBox = qobject_cast<QComboBox*>(editor);
+    QComboBox *comboBox = qobject_cast<QComboBox *>(editor);
     Bencode::Type type = static_cast<Bencode::Type>(comboBox->itemData(comboBox->currentIndex()).toInt());
-    qobject_cast<BencodeModel*>(model)->changeType(index, type);
+    qobject_cast<BencodeModel *>(model)->changeType(index, type);
 }
 
 QSize BencodeDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const

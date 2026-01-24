@@ -5,24 +5,25 @@
 
 #include <QApplication>
 #include <QClipboard>
-#include <QKeyEvent>
-#include <QItemSelectionModel>
-#include <QMenu>
-#include <QLineEdit>
 #include <QDir>
+#include <QItemSelectionModel>
+#include <QKeyEvent>
+#include <QLineEdit>
+#include <QMenu>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 10, 0)
-# include <QStyleHints>
-# define ACCEL_KEY(k) ((!QCoreApplication::testAttribute(Qt::AA_DontShowIconsInMenus)                      \
-                         && QGuiApplication::styleHints()->showShortcutsInContextMenus())                  \
-                       && !QKeySequence(k).toString(QKeySequence::NativeText).isEmpty() ?                  \
-                       QLatin1Char('\t') + QKeySequence(k).toString(QKeySequence::NativeText) : QString())
+#include <QStyleHints>
+#define ACCEL_KEY(k)                                                                                                                                           \
+    ((!QCoreApplication::testAttribute(Qt::AA_DontShowIconsInMenus) && QGuiApplication::styleHints()->showShortcutsInContextMenus())                           \
+             && !QKeySequence(k).toString(QKeySequence::NativeText).isEmpty()                                                                                  \
+         ? QLatin1Char('\t') + QKeySequence(k).toString(QKeySequence::NativeText)                                                                              \
+         : QString())
 #else
-# define ACCEL_KEY(k) (!QCoreApplication::testAttribute(Qt::AA_DontShowIconsInMenus)                       \
-                       && !QKeySequence(k).toString(QKeySequence::NativeText).isEmpty() ?                  \
-                       QLatin1Char('\t') + QKeySequence(k).toString(QKeySequence::NativeText) : QString())
+#define ACCEL_KEY(k)                                                                                                                                           \
+    (!QCoreApplication::testAttribute(Qt::AA_DontShowIconsInMenus) && !QKeySequence(k).toString(QKeySequence::NativeText).isEmpty()                            \
+         ? QLatin1Char('\t') + QKeySequence(k).toString(QKeySequence::NativeText)                                                                              \
+         : QString())
 #endif
-
 
 TableView::TableView(QWidget *parent)
     : QTableView(parent)
@@ -56,7 +57,7 @@ void TableView::copy()
     QItemSelectionModel *selection = selectionModel();
     QModelIndexList rows = selection->selectedRows();
     QStringList files;
-    for (const auto &row: rows) {
+    for (const auto &row : rows) {
         files << row.data().toString();
     }
 
@@ -107,7 +108,6 @@ void TableView::copyWoExt()
 
 QModelIndex TableView::moveCursor(CursorAction cursorAction, Qt::KeyboardModifiers modifiers)
 {
-
     switch (cursorAction) {
     case QAbstractItemView::MoveHome:
         return model()->index(0, 0);
@@ -127,8 +127,7 @@ void TableView::keyPressEvent(QKeyEvent *event)
 {
     if (event == QKeySequence::Delete) {
         emit deleteRow();
-    }
-    else {
+    } else {
         QTableView::keyPressEvent(event);
     }
 }
@@ -145,7 +144,7 @@ void TableView::contextMenuEvent(QContextMenuEvent *event)
 
 void TableView::changeEvent(QEvent *event)
 {
-    switch(event->type()) {
+    switch (event->type()) {
     case QEvent::LanguageChange:
         updateTranslations();
         break;

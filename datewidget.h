@@ -14,17 +14,11 @@ class DateWidget : public LineEditWidget
 {
     Q_OBJECT
 
-    Q_PROPERTY(QDate date
-               READ date
-               WRITE setDate)
+    Q_PROPERTY(QDate date READ date WRITE setDate)
 
-    Q_PROPERTY(QTime time
-               READ time
-               WRITE setTime)
+    Q_PROPERTY(QTime time READ time WRITE setTime)
 
-    Q_PROPERTY(QDateTime dateTime
-               READ dateTime
-               WRITE setDateTime)
+    Q_PROPERTY(QDateTime dateTime READ dateTime WRITE setDateTime)
 
 public:
     explicit DateWidget(QWidget *parent = 0);
@@ -50,7 +44,6 @@ protected:
     void retranslateUi() override;
 
 private:
-
     // Inner widgets
     QPushButton *_tbCalendar;
     QPushButton *_tbClean;

@@ -27,7 +27,7 @@ bool Application::event(QEvent *event)
 {
     // To use Mac OS X bundle for opening .torrent files
     if (event->type() == QEvent::FileOpen) {
-        QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent*>(event);
+        QFileOpenEvent *fileOpenEvent = static_cast<QFileOpenEvent *>(event);
         _mainWindow->open(fileOpenEvent->file());
     }
 

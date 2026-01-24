@@ -2,50 +2,50 @@
 // SPDX-FileContributor: 2023 Alexey Dokuchaev <danfe@nsu.ru>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+#include "mainwindow.h"
 #include "aboutdlg.h"
 #include "bencode.h"
 #include "bencodedelegate.h"
 #include "bencodemodel.h"
 #include "jsonconverter.h"
-#include "mainwindow.h"
 #include "searchdlg.h"
 #include "ui_mainwindow.h"
 
-#include <QFileDialog>
-#include <QFile>
-#include <QMessageBox>
-#include <QDesktopServices>
-#include <QIcon>
-#include <QUrl>
-#include <QLocale>
-#include <QApplication>
-#include <qmath.h>
-#include <QStandardItemModel>
-#include <QDirIterator>
-#include <QProgressDialog>
-#include <QThread>
-#include <QTextCodec>
 #include <QAbstractItemDelegate>
-#include <QPersistentModelIndex>
-#include <QInputDialog>
-#include <QCryptographicHash>
-#include <QTextDocument>
-#include <QMimeData>
-#include <QElapsedTimer>
-#include <QShortcut>
+#include <QApplication>
 #include <QClipboard>
-#include <QTranslator>
+#include <QCryptographicHash>
+#include <QDesktopServices>
+#include <QDirIterator>
+#include <QElapsedTimer>
+#include <QFile>
+#include <QFileDialog>
+#include <QIcon>
+#include <QInputDialog>
 #include <QLibraryInfo>
+#include <QLocale>
+#include <QMessageBox>
+#include <QMimeData>
+#include <QPersistentModelIndex>
+#include <QProgressDialog>
+#include <QShortcut>
+#include <QStandardItemModel>
+#include <QTextCodec>
+#include <QTextDocument>
+#include <QThread>
+#include <QTranslator>
+#include <QUrl>
+#include <qmath.h>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-# include <QRegularExpression>
+#include <QRegularExpression>
 #else
-# include <QRegExp>
+#include <QRegExp>
 #endif
 
 #ifdef Q_OS_WIN
-# include <io.h>
-# include <windows.h>
+#include <io.h>
+#include <windows.h>
 #endif
 
 #define PROGRESS_TIMEOUT 500 /* ms */
@@ -60,8 +60,7 @@ static qint64 fileSize(const QString &path)
     QFileInfo fi(path);
     if (!fi.isSymLink()) {
         return fi.size();
-    }
-    else {
+    } else {
         QFile file(path);
         file.open(QFile::ReadOnly); // it must be open to get a windows file handle
         HANDLE hFile = reinterpret_cast<HANDLE>(_get_osfhandle(file.handle()));
@@ -205,8 +204,9 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
 #ifdef Q_OS_WIN
-    setStyleSheet(QStringLiteral("QSplitter::handle { background-color: rgba(0, 0, 0, 0) }\n"
-                                 "QSplitter { background-color: rgba(0, 0, 0, 0) }"));
+    setStyleSheet(
+        QStringLiteral("QSplitter::handle { background-color: rgba(0, 0, 0, 0) }\n"
+                       "QSplitter { background-color: rgba(0, 0, 0, 0) }"));
 #endif
 
     QStandardItemModel *model = new QStandardItemModel(0, 4, this);
@@ -273,10 +273,10 @@ MainWindow::MainWindow(QWidget *parent)
     fillCoding();
     updateFilesSize();
 
-    connect(_bencodeModel, SIGNAL(dataChanged(const QModelIndex&, const QModelIndex&)), SLOT(updateTitle()));
-    connect(_bencodeModel, SIGNAL(rowsMoved(const QModelIndex&, int, int, const QModelIndex&, int)), SLOT(updateTitle()));
-    connect(_bencodeModel, SIGNAL(rowsRemoved(const QModelIndex&, int, int)), SLOT(updateTitle()));
-    connect(_bencodeModel, SIGNAL(rowsInserted(const QModelIndex&, int, int)), SLOT(updateTitle()));
+    connect(_bencodeModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), SLOT(updateTitle()));
+    connect(_bencodeModel, SIGNAL(rowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)), SLOT(updateTitle()));
+    connect(_bencodeModel, SIGNAL(rowsRemoved(const QModelIndex &, int, int)), SLOT(updateTitle()));
+    connect(_bencodeModel, SIGNAL(rowsInserted(const QModelIndex &, int, int)), SLOT(updateTitle()));
     connect(_bencodeModel, SIGNAL(layoutChanged()), SLOT(updateTitle()));
     connect(_bencodeModel, SIGNAL(modelReset()), SLOT(updateTitle()));
 
@@ -305,7 +305,7 @@ void MainWindow::showTranslations()
     QStringList translations = dir.entryList(QDir::Filter::NoDotAndDotDot | QDir::Filter::Files);
     QString langs;
     QString locales;
-    for (const QString &translation: translations) {
+    for (const QString &translation : translations) {
         QString lang = translation.section(QLatin1Char('_'), 1).section(QLatin1Char('.'), 0, 0);
         langs += lang + QLatin1String(" ");
         QLocale locale(lang);
@@ -337,8 +337,7 @@ void MainWindow::changeTranslation(int index)
     if (_translator) {
         qApp->removeTranslator(_translator);
         qApp->removeTranslator(_translatorQt);
-    }
-    else {
+    } else {
         _translator = new QTranslator(this);
         _translatorQt = new QTranslator(this);
     }
@@ -346,10 +345,9 @@ void MainWindow::changeTranslation(int index)
     QLocale locale = index < 0 ? QLocale() : QLocale(ui->cmbTranslation->itemData(index).toString());
 
     QStringList translationPathes;
-    translationPathes << QCoreApplication::applicationDirPath()
-                      << QStringLiteral(":/translations");
+    translationPathes << QCoreApplication::applicationDirPath() << QStringLiteral(":/translations");
 
-    for (QString path: translationPathes) {
+    for (QString path : translationPathes) {
         if (_translator->load(locale, QStringLiteral("torrentfileeditor"), QStringLiteral("_"), path)) {
             qApp->installTranslator(_translator);
             break;
@@ -359,11 +357,11 @@ void MainWindow::changeTranslation(int index)
 #ifdef Q_OS_WIN
     QString qtTranslationsPath(QStringLiteral(":/translations"));
 #else
-# if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QString qtTranslationsPath = QLibraryInfo::path(QLibraryInfo::TranslationsPath);
-# else
+#else
     QString qtTranslationsPath = QLibraryInfo::location(QLibraryInfo::TranslationsPath);
-# endif
+#endif
 #endif
 
     QString qtTranslationsName(QStringLiteral("qt"));
@@ -385,7 +383,7 @@ void MainWindow::create()
     updateTab(ui->tabWidget->currentIndex());
 
     // Files tab
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     model->removeRows(0, model->rowCount());
 
     ui->leBaseFolder->setText(QString());
@@ -410,7 +408,7 @@ void MainWindow::open(const QString &fileName)
     _bencodeModel->resetModified();
     updateTitle();
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     model->removeRows(0, model->rowCount());
     updateFiles();
 }
@@ -532,7 +530,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::changeEvent(QEvent *event)
 {
-    switch(event->type()) {
+    switch (event->type()) {
     case QEvent::LanguageChange:
         retranslateUi();
         break;
@@ -547,15 +545,14 @@ void MainWindow::changeEvent(QEvent *event)
 // Token from qmmp
 void MainWindow::fillCoding()
 {
-    QMap<QString, QTextCodec*> codecMap;
+    QMap<QString, QTextCodec *> codecMap;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
     QRegularExpression iso8859RegExp(QStringLiteral("^ISO[- ]8859-([0-9]+).*$"));
 #else
     QRegExp iso8859RegExp(QStringLiteral("ISO[- ]8859-([0-9]+).*"));
 #endif
 
-    for (int mib: QTextCodec::availableMibs())
-    {
+    for (int mib : QTextCodec::availableMibs()) {
         QTextCodec *codec = QTextCodec::codecForMib(mib);
 
         QString sortKey = QString::fromUtf8(codec->name().toUpper());
@@ -566,8 +563,7 @@ void MainWindow::fillCoding()
 #endif
         if (sortKey.startsWith(QLatin1String("UTF-8"))) {
             rank = 1;
-        }
-        else if (sortKey.startsWith(QLatin1String("UTF-16"))) {
+        } else if (sortKey.startsWith(QLatin1String("UTF-16"))) {
             rank = 2;
         }
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
@@ -578,12 +574,10 @@ void MainWindow::fillCoding()
             if (iso8859RegExp.cap(1).size() == 1) {
 #endif
                 rank = 3;
-            }
-            else {
+            } else {
                 rank = 4;
             }
-        }
-        else {
+        } else {
             rank = 5;
         }
         sortKey.prepend(QChar('0' + rank));
@@ -604,11 +598,9 @@ void MainWindow::updateTitle()
 {
     if (_fileName.isEmpty()) {
         setWindowTitle(qApp->applicationName());
-    }
-    else if (isModified()) {
+    } else if (isModified()) {
         setWindowTitle(QStringLiteral("* %2 - %1").arg(qApp->applicationName(), QDir::toNativeSeparators(_fileName)));
-    }
-    else {
+    } else {
         setWindowTitle(QStringLiteral("%2 - %1").arg(qApp->applicationName(), QDir::toNativeSeparators(_fileName)));
     }
 }
@@ -677,7 +669,7 @@ void MainWindow::updateEncoding()
 
 void MainWindow::makeTorrent()
 {
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     if (!model->rowCount())
         return;
 
@@ -702,21 +694,20 @@ void MainWindow::makeTorrent()
             QMessageBox::StandardButton button;
             button = QMessageBox::question(this,
                                            tr("Torrent root folder is not set"),
-                                           tr(
-"Path to files on the disk in not known. Torrent can be generated only from fully downloaded files.\n\n"
-"If you want to edit file list in the current torrent you need to set torrent root folder. The torrent root folder is a folder where all files can be located on the disk. Actual file path on the disk is torrent root folder with relative path from torrent file. If something files are missing then torrent can't be generated.\n\n"
-"Do you want to set torrent root folder and try again?"
-                                              ), QMessageBox::Yes | QMessageBox::No);
+                                           tr("Path to files on the disk in not known. Torrent can be generated only from fully downloaded files.\n\n"
+                                              "If you want to edit file list in the current torrent you need to set torrent root folder. The torrent root "
+                                              "folder is a folder where all files can be located on the disk. Actual file path on the disk is torrent root "
+                                              "folder with relative path from torrent file. If something files are missing then torrent can't be generated.\n\n"
+                                              "Do you want to set torrent root folder and try again?"),
+                                           QMessageBox::Yes | QMessageBox::No);
             if (button == QMessageBox::Yes) {
                 ui->leBaseFolder->openFolder();
                 baseDir = QDir(ui->leBaseFolder->text());
-            }
-            else {
+            } else {
                 break;
             }
         }
-    } while(hasRelative);
-
+    } while (hasRelative);
 
     if (hasRelative)
         return;
@@ -725,8 +716,7 @@ void MainWindow::makeTorrent()
         if (baseDir.isRoot()) {
             QMessageBox::warning(this, tr("Warning"), tr("The filesystem root can't be used as a torrent root folder."));
             return;
-        }
-        else if (ui->leBaseFolder->text().isEmpty()) {
+        } else if (ui->leBaseFolder->text().isEmpty()) {
             QMessageBox::warning(this, tr("Warning"), tr("The torrent root folder is not set."));
             return;
         }
@@ -755,11 +745,11 @@ void MainWindow::makeTorrent()
     Worker *worker = new Worker;
     worker->moveToThread(thread);
     connect(thread, SIGNAL(finished()), worker, SLOT(deleteLater()));
-    connect(this, SIGNAL(needHash(const QStringList&, int)), worker, SLOT(doWork(const QStringList&, int)));
+    connect(this, SIGNAL(needHash(const QStringList &, int)), worker, SLOT(doWork(const QStringList &, int)));
     connect(_progressDialog, SIGNAL(canceled()), worker, SLOT(cancel()));
-    connect(worker, SIGNAL(resultReady(const QByteArray&, const QString&)), this, SLOT(setPieces(const QByteArray&, const QString&)));
+    connect(worker, SIGNAL(resultReady(const QByteArray &, const QString &)), this, SLOT(setPieces(const QByteArray &, const QString &)));
     connect(worker, SIGNAL(progress(int)), _progressDialog, SLOT(setValue(int)));
-    connect(worker, SIGNAL(resultReady(const QByteArray&, const QString&)), thread, SLOT(quit()));
+    connect(worker, SIGNAL(resultReady(const QByteArray &, const QString &)), thread, SLOT(quit()));
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     thread->start();
 
@@ -769,17 +759,15 @@ void MainWindow::makeTorrent()
     _bencodeModel->setPieceSize(pieceSize);
     if (files.size() == 1) {
         _bencodeModel->setName(QFileInfo(files.at(0)).fileName());
-    }
-    else {
+    } else {
         _bencodeModel->setName(baseDir.dirName());
     }
 
     QList<QPair<QString, qlonglong>> filePairs;
     if (files.size() == 1) {
         filePairs << QPair<QString, qlonglong>(QString(), totalSize);
-    }
-    else {
-        for (const QString &file: files) {
+    } else {
+        for (const QString &file : files) {
             filePairs << QPair<QString, qlonglong>(baseDir.relativeFilePath(file), fileSize(file));
         }
     }
@@ -791,13 +779,14 @@ void MainWindow::addFile()
     // Will believe that it's very rare case when need to add symlink.
     // Native dialog looks very nice. So use it.
 
-//#ifdef Q_OS_WIN
-//    // On Windows symbolic link is real file. So use it.
-//    // Also native dialog always returns resolved path. So use Qt dialog.
-//    QStringList files = QFileDialog::getOpenFileNames(this, tr("Add File"), _lastFolder, QString(), nullptr, QFileDialog::DontResolveSymlinks | QFileDialog::DontUseNativeDialog);
-//#else
+    // #ifdef Q_OS_WIN
+    //     // On Windows symbolic link is real file. So use it.
+    //     // Also native dialog always returns resolved path. So use Qt dialog.
+    //     QStringList files = QFileDialog::getOpenFileNames(this, tr("Add File"), _lastFolder, QString(), nullptr, QFileDialog::DontResolveSymlinks |
+    //     QFileDialog::DontUseNativeDialog);
+    // #else
     QStringList files = QFileDialog::getOpenFileNames(this, tr("Add File"), _lastFolder, QString());
-//#endif
+    // #endif
     if (files.isEmpty())
         return;
 
@@ -837,7 +826,7 @@ void MainWindow::addFolder()
 
     files.sort();
 
-    for (const QString &file: files) {
+    for (const QString &file : files) {
         addFilesRow(file, fileSize(file));
     }
 
@@ -850,7 +839,7 @@ void MainWindow::addFolder()
 
 void MainWindow::removeFile()
 {
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     QItemSelectionModel *selectionModel = ui->viewFiles->selectionModel();
 
     if (!selectionModel->hasSelection())
@@ -878,8 +867,8 @@ void MainWindow::upFile()
     if (row == 0)
         return;
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
-    QList<QStandardItem*> list = model->takeRow(row);
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
+    QList<QStandardItem *> list = model->takeRow(row);
     model->insertRow(row - 1, list);
     ui->viewFiles->selectRow(row - 1);
 }
@@ -891,19 +880,19 @@ void MainWindow::downFile()
     if (!selectionModel->hasSelection())
         return;
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     int row = selectionModel->selectedRows().at(0).row();
     if (row == model->rowCount() - 1)
         return;
 
-    QList<QStandardItem*> list = model->takeRow(row);
+    QList<QStandardItem *> list = model->takeRow(row);
     model->insertRow(row + 1, list);
     ui->viewFiles->selectRow(row + 1);
 }
 
 void MainWindow::reloadFiles()
 {
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     model->removeRows(0, model->rowCount());
     updateFiles();
 }
@@ -914,11 +903,11 @@ void MainWindow::updateFiles()
     if (files.isEmpty())
         return;
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
 
     // Fill files from _bencode if empty
     if (!model->rowCount()) {
-        for (const auto &file: files) {
+        for (const auto &file : files) {
             addFilesRow(file.first, file.second);
         }
         qulonglong pieceSize = _bencodeModel->pieceSize();
@@ -963,12 +952,12 @@ void MainWindow::setPieces(const QByteArray &pieces, const QString &errorString)
 void MainWindow::updateRawPosition()
 {
     QTextCursor textCursor = ui->pteEditor->textCursor();
-    ui->lblCursorPos->setText(QString(tr("Line: %1 of %2 Col: %3")).arg(textCursor.blockNumber() + 1).arg(ui->pteEditor->blockCount()).arg(textCursor.positionInBlock() + 1));
+    ui->lblCursorPos->setText(
+        QString(tr("Line: %1 of %2 Col: %3")).arg(textCursor.blockNumber() + 1).arg(ui->pteEditor->blockCount()).arg(textCursor.positionInBlock() + 1));
 }
 
 void MainWindow::filterFiles()
 {
-
     FilesFilters filter = static_cast<FilesFilters>(ui->cmbFilesFilter->currentIndex());
     QString pattern = ui->lneFilesFilter->text();
     if (pattern.isEmpty())
@@ -980,8 +969,8 @@ void MainWindow::filterFiles()
     }
 #endif
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
-    for (int i =  model->rowCount() - 1; i >= 0; --i) {
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
+    for (int i = model->rowCount() - 1; i >= 0; --i) {
         QString file = model->item(i)->text();
         QFileInfo fi(file);
 
@@ -990,14 +979,14 @@ void MainWindow::filterFiles()
         Qt::CaseSensitivity cs = Qt::CaseSensitive;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         QRegularExpression::PatternOptions po = QRegularExpression::NoPatternOption;
-# endif
+#endif
 #else
         // On Windows FAT32 and NTFS file systems are case insensetive
         // On Mac OS HFS file system is case insensetive by default
         Qt::CaseSensitivity cs = Qt::CaseInsensitive;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
         QRegularExpression::PatternOptions po = QRegularExpression::CaseInsensitiveOption;
-# endif
+#endif
 #endif
 
         bool removeFile = false;
@@ -1023,7 +1012,7 @@ void MainWindow::filterFiles()
 #endif
                 removeFile = true;
             }
-            } break;
+        } break;
 
         case FilesFilters::RegExpFilter: {
             QString path = QDir::toNativeSeparators(fi.filePath());
@@ -1037,7 +1026,7 @@ void MainWindow::filterFiles()
 #endif
                 removeFile = true;
             }
-            } break;
+        } break;
         }
 
         if (removeFile) {
@@ -1074,7 +1063,7 @@ void MainWindow::removeTreeItem()
 
     QList<QPersistentModelIndex> indexes;
 
-    for (const QModelIndex &i: ui->treeJson->selectionModel()->selectedRows()) {
+    for (const QModelIndex &i : ui->treeJson->selectionModel()->selectedRows()) {
         // Skip root item
         if (!i.parent().isValid())
             continue;
@@ -1082,15 +1071,14 @@ void MainWindow::removeTreeItem()
         indexes << i;
     }
 
-    for (const QPersistentModelIndex &i: indexes) {
+    for (const QPersistentModelIndex &i : indexes) {
         if (i.isValid())
             ui->treeJson->model()->removeRow(i.row(), i.parent());
     }
 
     if (row >= 0 && row < _bencodeModel->rowCount(parent)) {
         ui->treeJson->setCurrentIndex(_bencodeModel->index(row, 0, parent));
-    }
-    else {
+    } else {
         ui->treeJson->setCurrentIndex(QModelIndex());
     }
 }
@@ -1109,7 +1097,7 @@ void MainWindow::showTreeSearchWindow()
 {
     if (!_searchDlg) {
         _searchDlg = new SearchDlg(_bencodeModel, this);
-        connect(_searchDlg, SIGNAL(foundItem(const QModelIndex&)), SLOT(selectTreeItem(QModelIndex)));
+        connect(_searchDlg, SIGNAL(foundItem(const QModelIndex &)), SLOT(selectTreeItem(QModelIndex)));
     }
 
     _searchDlg->setReplaceModeEnabled(false);
@@ -1120,7 +1108,7 @@ void MainWindow::showTreeReplaceWindow()
 {
     if (!_searchDlg) {
         _searchDlg = new SearchDlg(_bencodeModel, this);
-        connect(_searchDlg, SIGNAL(foundItem(const QModelIndex&)), SLOT(selectTreeItem(QModelIndex)));
+        connect(_searchDlg, SIGNAL(foundItem(const QModelIndex &)), SLOT(selectTreeItem(QModelIndex)));
     }
 
     _searchDlg->setReplaceModeEnabled(true);
@@ -1182,8 +1170,7 @@ void MainWindow::updateBencodeFromRaw()
     if (variant.isValid()) {
         ui->lblRawError->setText(QString());
         _bencodeModel->setJson(variant);
-    }
-    else {
+    } else {
         int line = str.left(byte).count(QStringLiteral("\n")) + 1;
         ui->lblRawError->setText(QString(tr("Error on %1 line: %2")).arg(QString::number(line)).arg(message));
     }
@@ -1220,15 +1207,13 @@ bool MainWindow::saveTo(const QString &fileName)
         if (file.write(raw) == -1) {
             QMessageBox::warning(this, tr("Can't save file"), file.errorString());
             return false;
-        }
-        else {
+        } else {
             file.close();
             _bencodeModel->resetModified();
             updateTitle();
             return true;
         }
-    }
-    else {
+    } else {
         QMessageBox::warning(this, tr("Can't save file"), file.errorString());
         return false;
     }
@@ -1236,7 +1221,7 @@ bool MainWindow::saveTo(const QString &fileName)
 
 qulonglong MainWindow::autoPieceSize() const
 {
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     qulonglong totalSize = 0;
 
     for (int i = 0; i < model->rowCount(); ++i) {
@@ -1258,7 +1243,7 @@ qulonglong MainWindow::autoPieceSize() const
 
 void MainWindow::updateFilesSize()
 {
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     qulonglong totalSize = 0;
 
     for (int i = 0; i < model->rowCount(); ++i) {
@@ -1272,10 +1257,10 @@ void MainWindow::updateFilesSize()
 
 void MainWindow::addFilesRow(const QString &path, qulonglong size)
 {
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     Q_ASSERT(model);
 
-    QList<QStandardItem*> list;
+    QList<QStandardItem *> list;
     list << new QStandardItem(QDir::toNativeSeparators(path));
     list << new QStandardItem(smartSize(size));
     list.last()->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -1288,7 +1273,7 @@ void MainWindow::addFilesRow(const QString &path, qulonglong size)
 
 void MainWindow::updateFilesPieces()
 {
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     if (!model)
         return;
 
@@ -1302,7 +1287,6 @@ void MainWindow::updateFilesPieces()
         totalSize += size;
         model->item(i, 2)->setText(QString::number(lastPiece - firstPiece + 1));
     }
-
 }
 
 QString MainWindow::smartSize(qulonglong size)
@@ -1325,25 +1309,25 @@ QString MainWindow::smartSize(qulonglong size)
         res.chop(1);
 
     switch (i) {
-        case 0:
-            res += QStringLiteral(" ") + tr("B");
-            break;
+    case 0:
+        res += QStringLiteral(" ") + tr("B");
+        break;
 
-        case 1:
-            res += QStringLiteral(" ") + tr("KiB");
-            break;
+    case 1:
+        res += QStringLiteral(" ") + tr("KiB");
+        break;
 
-        case 2:
-            res += QStringLiteral(" ") + tr("MiB");
-            break;
+    case 2:
+        res += QStringLiteral(" ") + tr("MiB");
+        break;
 
-        case 3:
-            res += QStringLiteral(" ") + tr("GiB");
-            break;
+    case 3:
+        res += QStringLiteral(" ") + tr("GiB");
+        break;
 
-        case 4:
-            res += QStringLiteral(" ") + tr("TiB");
-            break;
+    case 4:
+        res += QStringLiteral(" ") + tr("TiB");
+        break;
     }
 
     return res;
@@ -1387,7 +1371,7 @@ void MainWindow::retranslateUi()
 
     ui->cmbPieceSizes->setItemText(0, tr("Auto"));
 
-    QStandardItemModel *model = qobject_cast<QStandardItemModel*>(ui->viewFiles->model());
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(ui->viewFiles->model());
     QStringList headers;
     headers << tr("Path") << tr("Size") << tr("# Pieces") << QString() /* dummy */;
     model->setHorizontalHeaderLabels(headers);

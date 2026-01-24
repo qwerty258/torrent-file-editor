@@ -5,8 +5,8 @@
 #include "bencodemodel.h"
 #include "combobox.h"
 
-#include <QMouseEvent>
 #include <QComboBox>
+#include <QMouseEvent>
 
 TreeView::TreeView(QWidget *parent)
     : QTreeView(parent)
@@ -19,8 +19,8 @@ void TreeView::mouseMoveEvent(QMouseEvent *event)
     QTreeView::mouseMoveEvent(event);
 
     // Close before opened edit widgets
-    QList<ComboBox*> list = findChildren<ComboBox*>();
-    for (auto item: list) {
+    QList<ComboBox *> list = findChildren<ComboBox *>();
+    for (auto item : list) {
         item->close();
     }
 
@@ -42,9 +42,9 @@ QStyleOptionViewItem TreeView::viewOptions() const
 #endif
     // Hack. Draw active focused tree when type combobox is showed
     // not just current line as in original QTreeView
-    QList<QComboBox*> list = findChildren<QComboBox*>();
+    QList<QComboBox *> list = findChildren<QComboBox *>();
     if (isActiveWindow()) {
-        for (auto widget: list) {
+        for (auto widget : list) {
             if (widget->hasFocus()) {
                 options.state |= QStyle::State_Active;
                 break;

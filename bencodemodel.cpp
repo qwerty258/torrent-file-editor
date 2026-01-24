@@ -4,11 +4,11 @@
 #include "bencodemodel.h"
 #include "bencode.h"
 
-#include <QTextCodec>
-#include <QDateTime>
 #include <QCryptographicHash>
-#include <QStringList>
+#include <QDateTime>
 #include <QDebug>
+#include <QStringList>
+#include <QTextCodec>
 #include <QUrl>
 
 BencodeModel::BencodeModel(QObject *parent)
@@ -114,8 +114,7 @@ void BencodeModel::setName(const QString &name)
         if (!_bencode->child("info")->childCount()) {
             removeRow(_bencode->child("info")->row(), nodeToIndex(_bencode));
         }
-    }
-    else if (!name.isEmpty()) {
+    } else if (!name.isEmpty()) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::Dictionary, "info")->checkAndCreate(Bencode::Type::String, "name")->setString(fromUnicode(name));
         emit layoutChanged();
@@ -137,8 +136,7 @@ void BencodeModel::setPrivateTorrent(bool privateTorrent)
         if (!_bencode->child("info")->childCount()) {
             removeRow(_bencode->child("info")->row(), nodeToIndex(_bencode));
         }
-    }
-    else if (privateTorrent) {
+    } else if (privateTorrent) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::Dictionary, "info")->checkAndCreate(Bencode::Type::Integer, "private")->setInteger(1);
         emit layoutChanged();
@@ -157,8 +155,7 @@ void BencodeModel::setUrl(const QString &url)
 {
     if (url.isEmpty() && _bencode && _bencode->child("publisher-url")) {
         removeRow(_bencode->child("publisher-url")->row(), nodeToIndex(_bencode));
-    }
-    else if (!url.isEmpty()) {
+    } else if (!url.isEmpty()) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::String, "publisher-url")->setString(fromUnicode(url));
         emit layoutChanged();
@@ -177,8 +174,7 @@ void BencodeModel::setPublisher(const QString &publisher)
 {
     if (publisher.isEmpty() && _bencode && _bencode->child("publisher")) {
         removeRow(_bencode->child("publisher")->row(), nodeToIndex(_bencode));
-    }
-    else if (!publisher.isEmpty()) {
+    } else if (!publisher.isEmpty()) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::String, "publisher")->setString(fromUnicode(publisher));
         emit layoutChanged();
@@ -197,8 +193,7 @@ void BencodeModel::setCreatedBy(const QString &createdBy)
 {
     if (createdBy.isEmpty() && _bencode && _bencode->child("created by")) {
         removeRow(_bencode->child("created by")->row(), nodeToIndex(_bencode));
-    }
-    else if (!createdBy.isEmpty()) {
+    } else if (!createdBy.isEmpty()) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::String, "created by")->setString(fromUnicode(createdBy));
         emit layoutChanged();
@@ -217,8 +212,7 @@ void BencodeModel::setCreationTime(const QDateTime &creationTime)
 {
     if (!creationTime.isValid() && _bencode && _bencode->child("creation date")) {
         removeRow(_bencode->child("creation date")->row(), nodeToIndex(_bencode));
-    }
-    else if (creationTime.isValid()) {
+    } else if (creationTime.isValid()) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::Integer, "creation date")->setInteger(static_cast<qlonglong>(creationTime.toMSecsSinceEpoch() / 1000));
         emit layoutChanged();
@@ -240,8 +234,7 @@ void BencodeModel::setPieceSize(int pieceSize)
         if (!_bencode->child("info")->childCount()) {
             removeRow(_bencode->child("info")->row(), nodeToIndex(_bencode));
         }
-    }
-    else if (pieceSize) {
+    } else if (pieceSize) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::Dictionary, "info")->checkAndCreate(Bencode::Type::Integer, "piece length")->setInteger(pieceSize);
         emit layoutChanged();
@@ -282,7 +275,7 @@ QString BencodeModel::magnetLink() const
             link += "&dn=" + QUrl::toPercentEncoding(name());
         }
 
-        for (const QString &tracker: trackers()) {
+        for (const QString &tracker : trackers()) {
             link += "&tr=" + QUrl::toPercentEncoding(tracker);
         }
     }
@@ -294,8 +287,7 @@ void BencodeModel::setComment(const QString &comment)
 {
     if (comment.isEmpty() && _bencode && _bencode->child("comment")) {
         removeRow(_bencode->child("comment")->row(), nodeToIndex(_bencode));
-    }
-    else if (!comment.isEmpty()) {
+    } else if (!comment.isEmpty()) {
         emit layoutAboutToBeChanged();
         _bencode->checkAndCreate(Bencode::Type::String, "comment")->setString(fromUnicode(comment));
         emit layoutChanged();
@@ -318,7 +310,7 @@ void BencodeModel::setTrackers(const QStringList &trackers)
     emit layoutAboutToBeChanged();
     _bencode->appendMapItem(new Bencode(Bencode::Type::List, "announce-list"));
 
-    for (const QString &tracker: trackers) {
+    for (const QString &tracker : trackers) {
         if (tracker.trimmed().isEmpty())
             continue;
 
@@ -330,8 +322,7 @@ void BencodeModel::setTrackers(const QStringList &trackers)
 
     if (_bencode->child("announce-list") && !_bencode->child("announce-list")->children().isEmpty()) {
         _bencode->checkAndCreate(Bencode::Type::String, "announce")->setString(_bencode->child("announce-list")->child(0)->child(0)->string());
-    }
-    else {
+    } else {
         delete _bencode->child("announce-list");
         delete _bencode->child("announce");
     }
@@ -350,7 +341,7 @@ QStringList BencodeModel::trackers() const
                 break;
             }
 
-            for (Bencode *bencodeItem: bencode->children()) {
+            for (Bencode *bencodeItem : bencode->children()) {
                 if (bencodeItem->isString()) {
                     trackers << toUnicode(bencodeItem->string());
                 }
@@ -359,7 +350,7 @@ QStringList BencodeModel::trackers() const
     }
 
     if (trackers.isEmpty()) {
-        if (_bencode->child("announce") &&  _bencode->child("announce")->isString())
+        if (_bencode->child("announce") && _bencode->child("announce")->isString())
             trackers << toUnicode(_bencode->child("announce")->string());
     }
 
@@ -373,11 +364,10 @@ void BencodeModel::setFiles(const QList<QPair<QString, qlonglong>> &files)
     if (files.size() == 1) {
         qlonglong totalSize = files.first().second;
         _bencode->child("info")->checkAndCreate(Bencode::Type::Integer, "length")->setInteger(totalSize);
-    }
-    else {
+    } else {
         delete _bencode->child("info")->child("files");
         _bencode->child("info")->appendMapItem(new Bencode(Bencode::Type::List, "files"));
-        for (const auto &filePair: files) {
+        for (const auto &filePair : files) {
             QString file = filePair.first;
             qlonglong size = filePair.second;
 
@@ -386,7 +376,7 @@ void BencodeModel::setFiles(const QList<QPair<QString, qlonglong>> &files)
 
             QStringList pathList = file.split(QStringLiteral("/"));
             fileItem->appendMapItem(new Bencode(Bencode::Type::List, "path"));
-            for (const QString &path: pathList) {
+            for (const QString &path : pathList) {
                 fileItem->child("path")->appendChild(new Bencode(fromUnicode(path)));
             }
             _bencode->child("info")->child("files")->appendChild(fileItem);
@@ -415,8 +405,7 @@ QList<QPair<QString, qlonglong>> BencodeModel::files() const
             }
             res << QPair<QString, qlonglong>(baseName, length);
         }
-    }
-    else {
+    } else {
         Bencode *list = info->child("files");
         if (!list)
             return res;
@@ -458,8 +447,7 @@ qulonglong BencodeModel::totalSize() const
             }
             res += length;
         }
-    }
-    else {
+    } else {
         Bencode *list = info->child("files");
         if (!list) {
             return res;
@@ -493,8 +481,7 @@ void BencodeModel::setPieces(const QByteArray &pieces)
         _bencode->child("info")->child("pieces")->setString(pieces);
         _bencode->child("info")->child("pieces")->setHex(true);
         emit layoutChanged();
-    }
-    else {
+    } else {
         removeRows(0, rowCount());
         _bencode = new Bencode(Bencode::Type::Dictionary, "root");
         beginInsertRows(QModelIndex(), 0, 0);
@@ -547,20 +534,19 @@ void BencodeModel::appendRow(const QModelIndex &parent)
         parentItem = parentItem->parent();
 
 #ifndef __clang__
-# pragma GCC diagnostic push
-# pragma GCC diagnostic ignored "-Wdeprecated-copy"
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-copy"
 #endif
         // In Qt4 QModelIdex has user-defined copy constructor but hasn't user-defined assignment
         parentIndex = parent.parent();
 #ifndef __clang__
-# pragma GCC diagnostic pop
+#pragma GCC diagnostic pop
 #endif
     }
 
     if (parentItem->isList()) {
         insertRow(rowCount(parentIndex), parentIndex);
-    }
-    else if (parentItem->isDictionary()) {
+    } else if (parentItem->isDictionary()) {
         insertRow(0, parentIndex);
     }
 }
@@ -602,7 +588,6 @@ bool BencodeModel::setData(const QModelIndex &index, const QVariant &value, int 
             Bencode *parentItem = item->parent();
             int newRow;
             for (newRow = 0; newRow < parentItem->childCount(); newRow++) {
-
                 if (newKey < parentItem->child(newRow)->key()) {
                     break;
                 }
@@ -616,18 +601,15 @@ bool BencodeModel::setData(const QModelIndex &index, const QVariant &value, int 
 
             if (realRow == item->row()) {
                 emit dataChanged(index, index);
-            }
-            else {
+            } else {
                 beginMoveRows(index.parent(), index.row(), index.row(), index.parent(), newRow);
                 item->setRow(realRow);
                 endMoveRows();
             }
-        }
-        else if (column == Column::Value) {
+        } else if (column == Column::Value) {
             if (item->isInteger()) {
                 item->setInteger(value.toLongLong());
-            }
-            else if (item->isString()) {
+            } else if (item->isString()) {
                 if (item->hex())
                     item->setString(QByteArray::fromHex(value.toByteArray()));
                 else
@@ -651,12 +633,10 @@ bool BencodeModel::setData(const QModelIndex &index, const QVariant &value, int 
     case Qt::UserRole + 1:
         if (item->isInteger()) {
             item->setInteger(value.toLongLong());
-        }
-        else if (item->isString()) {
+        } else if (item->isString()) {
             if (role == Qt::UserRole) {
                 item->setString(fromUnicode(value.toString()));
-            }
-            else {
+            } else {
                 item->setString(QByteArray::fromHex(value.toByteArray()));
             }
         }
@@ -698,15 +678,13 @@ QVariant BencodeModel::data(const QModelIndex &index, int role) const
         case Column::Value:
             if (item->isInteger()) {
                 res = item->integer();
-            }
-            else if (item->isString()) {
+            } else if (item->isString()) {
                 if (role == Qt::DisplayRole) {
                     if (item->hex())
                         res = QString::fromUtf8(item->string().toHex()).left(150);
                     else
                         res = toUnicode(item->string()).left(150);
-                }
-                else {
+                } else {
                     if (item->hex())
                         res = QString::fromUtf8(item->string().toHex());
                     else
@@ -718,25 +696,20 @@ QVariant BencodeModel::data(const QModelIndex &index, int role) const
         default:
             break;
         }
-    }
-    else if (role == Qt::CheckStateRole) {
+    } else if (role == Qt::CheckStateRole) {
         if (column == Column::Hex && item->isString()) {
             res = item->hex() ? Qt::Checked : Qt::Unchecked;
         }
-    }
-    else if (role >= Qt::UserRole) {
+    } else if (role >= Qt::UserRole) {
         if (item->isInteger()) {
             res = QString::number(item->integer());
-        }
-        else if (item->isString()) {
+        } else if (item->isString()) {
             if (role == Qt::ItemDataRole::UserRole) {
                 res = toUnicode(item->string());
-            }
-            else {
+            } else {
                 res = QString::fromUtf8(item->string().toHex());
             }
         }
-
     }
 
     return res;
@@ -749,11 +722,20 @@ QVariant BencodeModel::headerData(int section, Qt::Orientation orientation, int 
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
         Column column = static_cast<Column>(section);
         switch (column) {
-            case Column::Name:  res = QVariant(tr("Name"));   break;
-            case Column::Type:  res = QVariant(tr("Type"));   break;
-            case Column::Hex:   res = QVariant(tr("Hex"));    break;
-            case Column::Value: res = QVariant(tr("Value"));  break;
-            default: break;
+        case Column::Name:
+            res = QVariant(tr("Name"));
+            break;
+        case Column::Type:
+            res = QVariant(tr("Type"));
+            break;
+        case Column::Hex:
+            res = QVariant(tr("Hex"));
+            break;
+        case Column::Value:
+            res = QVariant(tr("Value"));
+            break;
+        default:
+            break;
         }
     }
     return res;
@@ -806,7 +788,7 @@ Qt::ItemFlags BencodeModel::flags(const QModelIndex &index) const
     if (item == _bencode)
         return f;
 
-    switch (column){
+    switch (column) {
     case Column::Name:
         if (item->parent()->isDictionary())
             f |= Qt::ItemIsEditable;

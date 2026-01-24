@@ -8,7 +8,6 @@
 #include <QHBoxLayout>
 #include <QIcon>
 #include <QKeyEvent>
-#include <QKeyEvent>
 #include <QLineEdit>
 #include <QLocale>
 #include <QPushButton>
@@ -62,7 +61,7 @@ DateWidget::DateWidget(QWidget *parent)
 
     setPopup(_calendar);
 
-    connect(_calendar, SIGNAL(clicked(const QDate&)), SLOT(closeCalendar(const QDate&)));
+    connect(_calendar, SIGNAL(clicked(const QDate &)), SLOT(closeCalendar(const QDate &)));
     connect(_tbCalendar, SIGNAL(clicked()), SLOT(showPopup()));
     connect(_tbCalendar, SIGNAL(clicked()), SLOT(calendarSetDate()));
 
@@ -119,7 +118,7 @@ void DateWidget::closeCalendar(const QDate &date)
 
 void DateWidget::calendarSetDate()
 {
-    if(date().isValid()) {
+    if (date().isValid()) {
         _calendar->setSelectedDate(date());
     }
 }

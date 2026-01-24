@@ -28,20 +28,24 @@ void CheckUpdate::start()
 
     // Make internet connection.
     hInternetSession = InternetOpen(_T("Microsoft Internet Explorer"), // agent
-                                    INTERNET_OPEN_TYPE_PRECONFIG,      // access
-                                    NULL, NULL, 0);                    // defaults
+                                    INTERNET_OPEN_TYPE_PRECONFIG, // access
+                                    NULL,
+                                    NULL,
+                                    0); // defaults
 
     // Make connection to desired page.
-    hURL = InternetOpenUrl(hInternetSession,                       // session handle
-                           CAST_URL,                               // URL to access
-                           NULL, -1L, 0, 0);                       // defaults
+    hURL = InternetOpenUrl(hInternetSession, // session handle
+                           CAST_URL, // URL to access
+                           NULL,
+                           -1L,
+                           0,
+                           0); // defaults
 
     // Read page into memory buffer.
-    InternetReadFile(hURL,                    // handle to URL
-                     (LPSTR)cBuffer,          // pointer to buffer
-                     (DWORD)sizeof(cBuffer),  // size of buffer
-                     &dwBytesRead);           // pointer to var to hold return value
-
+    InternetReadFile(hURL, // handle to URL
+                     (LPSTR)cBuffer, // pointer to buffer
+                     (DWORD)sizeof(cBuffer), // size of buffer
+                     &dwBytesRead); // pointer to var to hold return value
 
     InternetCloseHandle(hURL);
 
@@ -53,8 +57,7 @@ void CheckUpdate::start()
 
     if (dwBytesRead < sizeof(cBuffer)) {
         cBuffer[dwBytesRead] = '\0';
-    }
-    else {
+    } else {
         cBuffer[sizeof(cBuffer) - 1] = '\0';
     }
 

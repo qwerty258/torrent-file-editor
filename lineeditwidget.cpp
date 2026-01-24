@@ -3,17 +3,17 @@
 
 #include "lineeditwidget.h"
 
-#include <QBoxLayout>
-#include <QApplication>
-#include <QEvent>
 #include <QAbstractButton>
+#include <QApplication>
+#include <QBoxLayout>
+#include <QEvent>
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-# include <QRegularExpressionValidator>
-# include <QScreen>
+#include <QRegularExpressionValidator>
+#include <QScreen>
 #else
-# include <QRegExpValidator>
-# include <QDesktopWidget>
+#include <QDesktopWidget>
+#include <QRegExpValidator>
 #endif
 
 LineEditWidget::LineEditWidget(QWidget *parent)
@@ -36,7 +36,6 @@ LineEditWidget::~LineEditWidget()
     _toolbuttons.clear();
 }
 
-
 QSize LineEditWidget::sizeHint() const
 {
     QSize size;
@@ -44,14 +43,13 @@ QSize LineEditWidget::sizeHint() const
 
     int width = 0;
 
-    if(_optimalLength) {
+    if (_optimalLength) {
 #if QT_VERSION < QT_VERSION_CHECK(5, 11, 0)
         width += fontMetrics().width(QStringLiteral("0")) * _optimalLength;
 #else
         width += fontMetrics().horizontalAdvance(QStringLiteral("0")) * _optimalLength;
 #endif
-    }
-    else {
+    } else {
         width += size.width();
     }
     width += textMargins().right();
@@ -63,10 +61,10 @@ void LineEditWidget::showEvent(QShowEvent *e)
 {
     // Width of standard QLineEdit plus extended tool buttons
     int width = 0;
-    for (QWidget *w: _toolbuttons) {
+    for (QWidget *w : _toolbuttons) {
         if (w->isVisible()) {
             width += w->width();
-            QAbstractButton *bt = qobject_cast<QAbstractButton*>(w);
+            QAbstractButton *bt = qobject_cast<QAbstractButton *>(w);
             if (bt && bt->iconSize().height() > bt->height()) {
                 bt->setIconSize(QSize(bt->height(), bt->height()));
             }
@@ -102,7 +100,7 @@ void LineEditWidget::setRxValidator(const QString &str)
 
 void LineEditWidget::changeEvent(QEvent *event)
 {
-    switch(event->type()) {
+    switch (event->type()) {
     case QEvent::LanguageChange:
         retranslateUi();
         break;
@@ -122,7 +120,7 @@ void LineEditWidget::addWidget(QWidget *w)
 
 void LineEditWidget::setPopup(QWidget *w)
 {
-    if(_popup) {
+    if (_popup) {
         delete _popup;
         _popup = 0;
     }
@@ -154,11 +152,11 @@ void LineEditWidget::showPopup()
     QRect rect = _popup->geometry();
 
     // if widget is beyond edge of display
-    if(rect.right() > size.width()) {
+    if (rect.right() > size.width()) {
         rect.moveRight(size.width());
     }
 
-    if(rect.bottom() > size.height()) {
+    if (rect.bottom() > size.height()) {
         rect.moveBottom(size.height());
     }
 

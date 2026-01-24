@@ -3,8 +3,8 @@
 
 #pragma once
 
-#include <QPlainTextEdit>
 #include <QObject>
+#include <QPlainTextEdit>
 
 class PlainTextEditNumber : public QWidget
 {
@@ -18,7 +18,6 @@ public:
 protected:
     void paintEvent(QPaintEvent *event) override;
 };
-
 
 class PlainTextEdit : public QPlainTextEdit
 {
@@ -42,4 +41,3 @@ private:
 
     friend class PlainTextEditNumber;
 };
-

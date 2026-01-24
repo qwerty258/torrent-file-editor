@@ -12,7 +12,10 @@ class BencodeModel;
 class QSizeGrip;
 #endif
 
-namespace Ui { class SearchDlg; }
+namespace Ui
+{
+class SearchDlg;
+}
 
 class SearchDlg : public QDialog
 {

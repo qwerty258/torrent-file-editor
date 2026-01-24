@@ -14,7 +14,7 @@ class AbstractTreeNode
 public:
     explicit AbstractTreeNode(T *parent = nullptr)
         : _parent(nullptr)
-        , _children(QList<T*>())
+        , _children(QList<T *>())
     {
         setParent(parent);
     }
@@ -23,7 +23,7 @@ public:
     {
         qDeleteAll(_children);
         if (_parent) {
-            _parent->_children.removeOne(reinterpret_cast<T*>(this));
+            _parent->_children.removeOne(reinterpret_cast<T *>(this));
         }
     }
 
@@ -39,17 +39,17 @@ public:
 
     inline int row() const
     {
-        return _parent ? _parent->_children.indexOf(reinterpret_cast<T*>(const_cast<AbstractTreeNode<T>*>(this))) : 0;
+        return _parent ? _parent->_children.indexOf(reinterpret_cast<T *>(const_cast<AbstractTreeNode<T> *>(this))) : 0;
     }
 
     inline void setParent(T *newParent)
     {
         if (_parent) {
-            _parent->_children.removeOne(reinterpret_cast<T*>(this));
+            _parent->_children.removeOne(reinterpret_cast<T *>(this));
         }
 
         if (newParent) {
-            newParent->_children.append(reinterpret_cast<T*>(this));
+            newParent->_children.append(reinterpret_cast<T *>(this));
         }
 
         _parent = newParent;
@@ -69,7 +69,7 @@ public:
             child->_parent->removeChild(child);
         }
 
-        child->_parent = reinterpret_cast<T*>(this);
+        child->_parent = reinterpret_cast<T *>(this);
         _children.insert(row, child);
     }
 
@@ -82,7 +82,7 @@ public:
             child->_parent->removeChild(child);
         }
 
-        child->_parent = reinterpret_cast<T*>(this);
+        child->_parent = reinterpret_cast<T *>(this);
         _children.append(child);
     }
 
@@ -99,8 +99,7 @@ public:
         Q_ASSERT(row < childCount());
         if (row < childCount()) {
             return _children.at(row);
-        }
-        else {
+        } else {
             return nullptr;
         }
     }
@@ -110,7 +109,7 @@ public:
         return _children.size();
     }
 
-    inline QList<T*> children() const
+    inline QList<T *> children() const
     {
         return _children;
     }
@@ -142,7 +141,7 @@ public:
         }
         ts << "\n";
 
-        for (T *item: _children) {
+        for (T *item : _children) {
             ts << item->dump(indent + 1);
             ts << "\n";
         }
@@ -155,5 +154,5 @@ public:
 
 private:
     T *_parent;
-    QList<T*> _children;
+    QList<T *> _children;
 };

@@ -14,7 +14,7 @@ PlainTextEditNumber::PlainTextEditNumber(QWidget *editor)
 
 QSize PlainTextEditNumber::sizeHint() const
 {
-    PlainTextEdit *parent = qobject_cast<PlainTextEdit*>(parentWidget());
+    PlainTextEdit *parent = qobject_cast<PlainTextEdit *>(parentWidget());
 
     int blockCount = parent->document()->blockCount();
 
@@ -33,7 +33,7 @@ void PlainTextEditNumber::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
 
-    PlainTextEdit *parent = qobject_cast<PlainTextEdit*>(parentWidget());
+    PlainTextEdit *parent = qobject_cast<PlainTextEdit *>(parentWidget());
 
     QPainter painter;
     painter.begin(this);
@@ -47,7 +47,7 @@ void PlainTextEditNumber::paintEvent(QPaintEvent *event)
     int currentBlock = parent->textCursor().block().blockNumber() + 1;
     while (block.isVisible() && block.isValid()) {
         QRect blockRect = parent->blockBoundingGeometry(block).translated(parent->contentOffset()).toRect();
-        QString lineNumber =  QString::number(block.blockNumber() + 1);
+        QString lineNumber = QString::number(block.blockNumber() + 1);
         int top = qMax(0, blockRect.top());
         if (currentBlock == lineNumber.toInt()) {
             painter.fillRect(0, top, width, height, parent->higlightColor());
@@ -64,7 +64,7 @@ PlainTextEdit::PlainTextEdit(QWidget *parent)
     , _numberWidget(new PlainTextEditNumber(this))
 {
     connect(document(), SIGNAL(blockCountChanged(int)), this, SLOT(updateWidth(int)));
-    connect(this, SIGNAL(updateRequest(QRect,int)), _numberWidget, SLOT(update()));
+    connect(this, SIGNAL(updateRequest(QRect, int)), _numberWidget, SLOT(update()));
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 
     document()->setDocumentMargin(0.);
@@ -99,7 +99,6 @@ void PlainTextEdit::highlightCurrentLine()
     extraSelections.append(selection);
 
     setExtraSelections(extraSelections);
-
 }
 
 QColor PlainTextEdit::higlightColor() const
@@ -109,8 +108,7 @@ QColor PlainTextEdit::higlightColor() const
         color = Qt::GlobalColor::cyan;
         if (palette().text().color().value() > 150) {
             color = color.darker().darker();
-        }
-        else {
+        } else {
             color = color.lighter().lighter(120);
         }
     }
@@ -125,8 +123,7 @@ QColor PlainTextEdit::bgColor() const
         color = Qt::GlobalColor::green;
         if (palette().text().color().value() > 150) {
             color = color.darker().darker();
-        }
-        else {
+        } else {
             color = color.lighter().lighter(120);
         }
     }

@@ -7,7 +7,10 @@
 
 class QThread;
 
-namespace Ui { class AboutDlg; }
+namespace Ui
+{
+class AboutDlg;
+}
 
 class AboutDlg : public QDialog
 {

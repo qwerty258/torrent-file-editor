@@ -7,8 +7,8 @@
 #include "jsonconverter.h"
 #include "mainwindow.h"
 
-#include <QVariant>
 #include <QFile>
+#include <QVariant>
 
 // Allow run Qt5 static version https://github.com/tonytheodore/mxe/commit/497669fa44356db0cd8335e2554b7bac12eb88c2
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0) && defined Q_OS_WIN && defined BUILD_STATIC
@@ -21,25 +21,25 @@ Q_IMPORT_PLUGIN(QJpegPlugin)
 #endif
 
 #ifdef Q_OS_WIN
-# include <windows.h>
+#include <windows.h>
 HANDLE hConsole = NULL;
 #endif
 
 #ifdef Q_OS_MAC
-# include "cocoainitializer.h"
-# include "sparkleautoupdater.h"
+#include "cocoainitializer.h"
+#include "sparkleautoupdater.h"
 #endif
 
 #ifdef ENABLE_NVWA
-# include "nvwa/debug_new.h"
+#include "nvwa/debug_new.h"
 #endif
 
 #ifdef Q_OS_WIN
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
 void winDebugHandler(QtMsgType type, const QMessageLogContext &context, const QString &msg)
-# else
+#else
 void winDebugHandler(QtMsgType type, const char *msg)
-# endif
+#endif
 {
     {
         QString time = QTime::currentTime().toString();
@@ -53,30 +53,29 @@ void winDebugHandler(QtMsgType type, const char *msg)
         case QtCriticalMsg:
             debugMsg += QLatin1String("C:");
             break;
-# if QT_VERSION >= 0x050500
+#if QT_VERSION >= 0x050500
         case QtInfoMsg:
             debugMsg += QLatin1String("I:");
             break;
-# endif
+#endif
 
         case QtFatalMsg:
             debugMsg += QLatin1String("F:");
             break;
             abort();
         }
-# if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
         debugMsg += msg;
         debugMsg += QStringLiteral(" (%1:%2, %3)").arg(QString::fromUtf8(context.file), QString::number(context.line), QString::fromUtf8(context.function));
-# else
+#else
         debugMsg += QLatin1String(msg);
-# endif
+#endif
 
-
-# ifdef UNICODE
+#ifdef UNICODE
         OutputDebugString(debugMsg.toStdWString().c_str());
-# else
+#else
         OutputDebugString(debugMsg.toStdString().c_str());
-# endif
+#endif
 
         if (type == QtFatalMsg)
             abort();
@@ -207,8 +206,7 @@ int main(int argc, char *argv[])
             if (!QFile::exists(source)) {
                 qDebug("Error: source file is not exist!");
                 retCode = -1;
-            }
-            else if (command == QLatin1String("--to-json"))
+            } else if (command == QLatin1String("--to-json"))
                 retCode = toJson(source, dest) ? 0 : -1;
             else
                 retCode = fromJson(source, dest) ? 0 : -1;
@@ -219,35 +217,35 @@ int main(int argc, char *argv[])
     }
 
 #ifdef Q_OS_WIN
-# if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
+#if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
     qInstallMessageHandler(winDebugHandler);
-# else
+#else
     qInstallMsgHandler(winDebugHandler);
-# endif
+#endif
 #endif
 
     int returnCode = 0;
     // For nvwa purposes. Need to delete local objects before leaks checking.
     {
-    Application a(argc, argv);
+        Application a(argc, argv);
 
-    MainWindow w;
-    a.setMainWindow(&w);
-    w.show();
+        MainWindow w;
+        a.setMainWindow(&w);
+        w.show();
 
 #ifdef Q_OS_MAC
-    CocoaInitializer initializer;
-    SparkleAutoUpdater *updater = new SparkleAutoUpdater;
-    updater->checkForUpdates();
+        CocoaInitializer initializer;
+        SparkleAutoUpdater *updater = new SparkleAutoUpdater;
+        updater->checkForUpdates();
 #endif
 
-    if (argc == 2) {
-        QString filename = QString::fromLocal8Bit(argv[1]);
-        if (QFile::exists(filename))
-            w.open(filename);
-    }
+        if (argc == 2) {
+            QString filename = QString::fromLocal8Bit(argv[1]);
+            if (QFile::exists(filename))
+                w.open(filename);
+        }
 
-    returnCode = a.exec();
+        returnCode = a.exec();
     }
 
 #ifdef ENABLE_NVWA

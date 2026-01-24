@@ -3,11 +3,11 @@
 
 #include "folderedit.h"
 
-#include <QUrl>
-#include <QPushButton>
 #include <QApplication>
-#include <QStyle>
 #include <QFileDialog>
+#include <QPushButton>
+#include <QStyle>
+#include <QUrl>
 
 FolderEdit::FolderEdit(QWidget *parent)
     : LineEditWidget(parent)

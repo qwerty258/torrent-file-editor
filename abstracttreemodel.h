@@ -39,11 +39,9 @@ public:
 
         if (childItem) {
             return createIndex(row, column, childItem);
-        }
-        else {
+        } else {
             return QModelIndex();
         }
-
     }
 
     QModelIndex parent(const QModelIndex &index) const override
@@ -76,8 +74,7 @@ public:
         T *parentItem;
         if (!parent.isValid()) {
             parentItem = _root;
-        }
-        else {
+        } else {
             parentItem = indexToNode(parent);
         }
 
@@ -92,7 +89,7 @@ protected:
 
     inline T *indexToNode(const QModelIndex &index) const
     {
-        return index.isValid() ? static_cast<T*>(index.internalPointer()) : _root;
+        return index.isValid() ? static_cast<T *>(index.internalPointer()) : _root;
     }
 
     inline QModelIndex nodeToIndex(T *node) const

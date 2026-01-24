@@ -16,5 +16,5 @@ public:
 
 private:
     class Private;
-    Private* d;
+    Private *d;
 };

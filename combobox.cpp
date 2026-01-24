@@ -4,9 +4,9 @@
 #include "combobox.h"
 
 #include <QAbstractItemView>
-#include <QTimer>
-#include <QShowEvent>
 #include <QCursor>
+#include <QShowEvent>
+#include <QTimer>
 
 ComboBox::ComboBox(QWidget *parent)
     : QComboBox(parent)

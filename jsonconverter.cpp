@@ -18,30 +18,23 @@ static QVariant jsonToVariant(const nlohmann::ordered_json &jsonValue)
             map[key] = val;
         }
         res = map;
-    }
-    else if (jsonValue.is_array()) {
+    } else if (jsonValue.is_array()) {
         QVariantList list;
-        for (const auto &item: jsonValue) {
+        for (const auto &item : jsonValue) {
             list.append(jsonToVariant(item));
         }
         res = list;
-    }
-    else if (jsonValue.is_number_unsigned()) {
+    } else if (jsonValue.is_number_unsigned()) {
         res = jsonValue.get<qulonglong>();
-    }
-    else if (jsonValue.is_number_integer()) {
+    } else if (jsonValue.is_number_integer()) {
         res = jsonValue.get<qlonglong>();
-    }
-    else if (jsonValue.is_number_float()) {
+    } else if (jsonValue.is_number_float()) {
         res = jsonValue.get<double>();
-    }
-    else if (jsonValue.is_boolean()) {
+    } else if (jsonValue.is_boolean()) {
         res = jsonValue.get<bool>();
-    }
-    else if (jsonValue.is_string()) {
+    } else if (jsonValue.is_string()) {
         res = QString::fromStdString(jsonValue.get<std::string>());
-    }
-    else {
+    } else {
         res = QVariant();
     }
 
@@ -71,7 +64,7 @@ static nlohmann::ordered_json variantToJson(const QVariant &variantValue)
     case QMetaType::QVariantList: {
         QVariantList list = variantValue.toList();
         res = nlohmann::ordered_json::array();
-        for (const QVariant &item: list) {
+        for (const QVariant &item : list) {
             res.push_back(variantToJson(item));
         }
         break;
@@ -123,8 +116,7 @@ QVariant JsonConverter::parse(const QString &str, int *byte, QString *error)
 
     try {
         json = nlohmann::ordered_json::parse(str.toStdString(), nullptr, allowExceptions, ignoreComments);
-    }
-    catch (nlohmann::ordered_json::parse_error &e) {
+    } catch (nlohmann::ordered_json::parse_error &e) {
         if (error) {
             QString str = QString::fromStdString(e.what()).section(QStringLiteral(":"), 1);
             *error = str;
@@ -133,8 +125,7 @@ QVariant JsonConverter::parse(const QString &str, int *byte, QString *error)
         if (byte) {
             *byte = e.byte;
         }
-    }
-    catch (nlohmann::ordered_json::exception &e) {
+    } catch (nlohmann::ordered_json::exception &e) {
         if (error) {
             *error = QString::fromStdString(e.what());
         }

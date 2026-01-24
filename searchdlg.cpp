@@ -2,11 +2,11 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "searchdlg.h"
-#include "ui_searchdlg.h"
 #include "bencodemodel.h"
+#include "ui_searchdlg.h"
 
 #ifdef Q_OS_MAC
-# include <QSizeGrip>
+#include <QSizeGrip>
 #endif
 
 SearchDlg::SearchDlg(BencodeModel *model, QWidget *parent)
@@ -24,8 +24,8 @@ SearchDlg::SearchDlg(BencodeModel *model, QWidget *parent)
 #endif
 {
     ui->setupUi(this);
-    connect(_model, SIGNAL(rowsRemoved(QModelIndex,int,int)), SLOT(resetSearchList()));
-    connect(_model, SIGNAL(rowsMoved(QModelIndex,int,int,QModelIndex,int)), SLOT(resetSearchList()));
+    connect(_model, SIGNAL(rowsRemoved(QModelIndex, int, int)), SLOT(resetSearchList()));
+    connect(_model, SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)), SLOT(resetSearchList()));
 
 #ifdef Q_OS_MAC
     // Workaround. Qt has no size grip on Mac OS X. Bug?
@@ -59,9 +59,7 @@ void SearchDlg::searchNext()
 {
     _searchIndex += ui->rdDown->isChecked() ? +1 : -1;
 
-    if ((ui->rdDown->isChecked() && _searchIndex == _searchList.size())
-        || (ui->rdUp->isChecked() && _searchIndex == -1)) {
-
+    if ((ui->rdDown->isChecked() && _searchIndex == _searchList.size()) || (ui->rdUp->isChecked() && _searchIndex == -1)) {
         resetSearchList();
     }
 
@@ -104,18 +102,15 @@ void SearchDlg::searchNext()
 
             if (ui->rdValueExactMatch->isChecked()) {
                 matchFlags |= Qt::MatchFlag::MatchFixedString;
-            }
-            else if (ui->rdValueWildcards->isChecked()) {
+            } else if (ui->rdValueWildcards->isChecked()) {
                 matchFlags |= Qt::MatchFlag::MatchWildcard;
-            }
-            else if (ui->rdValueRegexp->isChecked()) {
+            } else if (ui->rdValueRegexp->isChecked()) {
 #if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
                 matchFlags |= Qt::MatchFlag::MatchRegularExpression;
 #else
                 matchFlags |= Qt::MatchFlag::MatchRegExp;
 #endif
-            }
-            else if (ui->rdValueHex->isChecked()) {
+            } else if (ui->rdValueHex->isChecked()) {
                 matchFlags |= Qt::MatchFlag::MatchContains;
                 matchFlags &= ~Qt::MatchFlag::MatchCaseSensitive;
                 role = static_cast<Qt::ItemDataRole>(Qt::UserRole + 1);
@@ -125,18 +120,16 @@ void SearchDlg::searchNext()
         }
 
         if (ui->grpKey->isChecked() && ui->grpValue->isChecked()) {
-            for (const auto &key: keys) {
-                for (const auto &value: values) {
+            for (const auto &key : keys) {
+                for (const auto &value : values) {
                     if (value == key) {
                         _searchList << key;
                     }
                 }
             }
-        }
-        else if (ui->grpKey->isChecked()) {
+        } else if (ui->grpKey->isChecked()) {
             _searchList = keys;
-        }
-        else if (ui->grpValue->isChecked()) {
+        } else if (ui->grpValue->isChecked()) {
             _searchList = values;
         }
         _searchIndex = ui->rdDown->isChecked() ? 0 : _searchList.size() - 1;
@@ -197,7 +190,7 @@ void SearchDlg::replaceAll()
         return;
 
     QString replaceStr = ui->lneReplace->text();
-    for (const auto &item: _searchList) {
+    for (const auto &item : _searchList) {
         _model->setData(item, replaceStr, Qt::UserRole + (ui->chkHex->isChecked() ? 1 : 0));
     }
 

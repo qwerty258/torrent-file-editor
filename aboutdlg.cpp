@@ -2,35 +2,34 @@
 // SPDX-License-Identifier: GPL-3.0-or-later
 
 #include "aboutdlg.h"
-#include "ui_aboutdlg.h"
 #include "application.h"
+#include "ui_aboutdlg.h"
 
 #include <QKeySequence>
 #include <QLocale>
 #include <QShortcut>
 
 #ifdef Q_OS_WIN
-# include "checkupdate.h"
-# include <QThread>
+#include "checkupdate.h"
+#include <QThread>
 #endif
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-# include <QRegularExpression>
+#include <QRegularExpression>
 #else
-# include <QRegExp>
+#include <QRegExp>
 #endif
 
-#define VERSION_LABEL                               \
-    "<style>"                                       \
-    "h2 {"                                          \
-    "margin-bottom: 0;"                             \
-    "}"                                             \
-    "p {"                                           \
-    "margin-top: 0;"                                \
-    "}"                                             \
-    "</style>"                                      \
+#define VERSION_LABEL                                                                                                                                          \
+    "<style>"                                                                                                                                                  \
+    "h2 {"                                                                                                                                                     \
+    "margin-bottom: 0;"                                                                                                                                        \
+    "}"                                                                                                                                                        \
+    "p {"                                                                                                                                                      \
+    "margin-top: 0;"                                                                                                                                           \
+    "}"                                                                                                                                                        \
+    "</style>"                                                                                                                                                 \
     "<h2>%1</h2><p>%2 (%3)</p>"
-
 
 struct Version {
     int major;
@@ -85,29 +84,25 @@ bool versionLessThan(const Version &left, const Version &right)
 {
     if (left.major < right.major) {
         return true;
-    }
-    else if (left.major > right.major) {
+    } else if (left.major > right.major) {
         return false;
     }
 
     if (left.minor < right.minor) {
         return true;
-    }
-    else if (left.minor > right.minor) {
+    } else if (left.minor > right.minor) {
         return false;
     }
 
     if (left.patch < right.patch) {
         return true;
-    }
-    else if (left.patch > right.patch) {
+    } else if (left.patch > right.patch) {
         return false;
     }
 
     if (left.rev < right.rev) {
         return true;
-    }
-    else if (left.rev > right.rev) {
+    } else if (left.rev > right.rev) {
         return false;
     }
 
@@ -117,8 +112,7 @@ bool versionLessThan(const Version &left, const Version &right)
 
     if (left.gitHash.isEmpty() && !right.gitHash.isEmpty()) {
         return true;
-    }
-    else if (!left.gitHash.isEmpty() && right.gitHash.isEmpty()) {
+    } else if (!left.gitHash.isEmpty() && right.gitHash.isEmpty()) {
         return false;
     }
 
@@ -142,10 +136,7 @@ AboutDlg::AboutDlg(QWidget *parent)
 
     QString buildDate = QLocale::system().toString(Application::buildDateTime().date());
 
-    ui->label->setText(QStringLiteral(VERSION_LABEL)
-                       .arg(qApp->applicationName())
-                       .arg(qApp->applicationVersion())
-                       .arg(buildDate));
+    ui->label->setText(QStringLiteral(VERSION_LABEL).arg(qApp->applicationName()).arg(qApp->applicationVersion()).arg(buildDate));
     setWindowTitle(QString(tr("About %1")).arg(qApp->applicationName()));
 
 #ifdef NO_DONATION
@@ -181,7 +172,7 @@ void AboutDlg::checkUpdate()
     CheckUpdate *cUpdate = new CheckUpdate;
     cUpdate->moveToThread(thread);
     connect(thread, SIGNAL(started()), cUpdate, SLOT(start()));
-    connect(cUpdate, SIGNAL(finished(const QString&, const QString&)), SLOT(showUpdate(const QString&, const QString&)));
+    connect(cUpdate, SIGNAL(finished(const QString &, const QString &)), SLOT(showUpdate(const QString &, const QString &)));
     thread->start();
 #endif
 }
@@ -202,12 +193,10 @@ void AboutDlg::showUpdate(const QString &version, const QString &url)
 
     if (version.isEmpty()) {
         ui->lbShowUpdate->setText(tr("Something went wrong"));
-    }
-    else {
+    } else {
         if (versionLessThan(parseVersion(qApp->applicationVersion()), parseVersion(version))) {
             ui->lbShowUpdate->setText(QString(tr("New version <a href=\"%2\">%1</a> has been detected")).arg(version).arg(url));
-        }
-        else {
+        } else {
             ui->lbShowUpdate->setText(tr("The latest version is installed"));
         }
     }

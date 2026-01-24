@@ -3,11 +3,11 @@
 
 #include "urledit.h"
 
-#include <QUrl>
-#include <QPushButton>
-#include <QDesktopServices>
 #include <QApplication>
 #include <QClipboard>
+#include <QDesktopServices>
+#include <QPushButton>
+#include <QUrl>
 
 UrlEdit::UrlEdit(QWidget *parent)
     : LineEditWidget(parent)

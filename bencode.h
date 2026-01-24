@@ -5,9 +5,9 @@
 
 #include "abstracttreenode.h"
 
-#include <QVariant>
-#include <QMap>
 #include <QList>
+#include <QMap>
+#include <QVariant>
 
 class Bencode : public AbstractTreeNode<Bencode>
 {
@@ -29,19 +29,46 @@ public:
     Bencode(const QByteArray &string, const QByteArray &key = QByteArray());
 
     void setType(Type type);
-    inline Type type() const { return _type; }
+    inline Type type() const
+    {
+        return _type;
+    }
 
-    inline void setInteger(qlonglong integer) { _integer = integer; }
-    inline qlonglong integer() const { return _integer; }
+    inline void setInteger(qlonglong integer)
+    {
+        _integer = integer;
+    }
+    inline qlonglong integer() const
+    {
+        return _integer;
+    }
 
-    inline void setString(const QByteArray &string) { _string = string; }
-    inline QByteArray string() const { return _string; }
+    inline void setString(const QByteArray &string)
+    {
+        _string = string;
+    }
+    inline QByteArray string() const
+    {
+        return _string;
+    }
 
-    inline void setKey(const QByteArray &key) { _key = key; }
-    inline QByteArray key() const { return _key; }
+    inline void setKey(const QByteArray &key)
+    {
+        _key = key;
+    }
+    inline QByteArray key() const
+    {
+        return _key;
+    }
 
-    inline void setHex(bool hex) { _hex = hex; }
-    inline bool hex() const { return _hex; }
+    inline void setHex(bool hex)
+    {
+        _hex = hex;
+    }
+    inline bool hex() const
+    {
+        return _hex;
+    }
 
     Bencode *checkAndCreate(Type type, int index);
     Bencode *checkAndCreate(Type type, const QByteArray &key);
@@ -56,11 +83,26 @@ public:
 
     Bencode *child(const QByteArray &key) const;
 
-    inline bool isValid() const { return _type != Invalid; }
-    inline bool isInteger() const { return _type == Integer; }
-    inline bool isString() const { return _type == String; }
-    inline bool isList() const { return _type == List; }
-    inline bool isDictionary() const { return _type == Dictionary; }
+    inline bool isValid() const
+    {
+        return _type != Invalid;
+    }
+    inline bool isInteger() const
+    {
+        return _type == Integer;
+    }
+    inline bool isString() const
+    {
+        return _type == String;
+    }
+    inline bool isList() const
+    {
+        return _type == List;
+    }
+    inline bool isDictionary() const
+    {
+        return _type == Dictionary;
+    }
 
     QByteArray toRaw() const;
     QVariant toJson() const;

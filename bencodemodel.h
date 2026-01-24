@@ -6,9 +6,9 @@
 #include "abstracttreemodel.h"
 #include "bencode.h"
 
-#include <QString>
 #include <QList>
 #include <QPair>
+#include <QString>
 
 class QTextCodec;
 
@@ -17,8 +17,7 @@ class BencodeModel : public AbstractTreeModel<Bencode>
     Q_OBJECT
 
 public:
-    enum class Column
-    {
+    enum class Column {
         Name,
         Type,
         Hex,

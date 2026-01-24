@@ -4,8 +4,8 @@
 #pragma once
 
 #include <QLineEdit>
-#include <QToolButton>
 #include <QList>
+#include <QToolButton>
 
 class QFrame;
 class QHBoxLayout;
@@ -25,10 +25,19 @@ public:
     bool eventFilter(QObject *o, QEvent *e) override;
 
     // Properties
-    int optimalLenth() const { return _optimalLength; }
-    void setOptimalLength(int optimalLength) { _optimalLength = optimalLength; }
+    int optimalLenth() const
+    {
+        return _optimalLength;
+    }
+    void setOptimalLength(int optimalLength)
+    {
+        _optimalLength = optimalLength;
+    }
 
-    QString rxValidator() const { return _rxValidator; }
+    QString rxValidator() const
+    {
+        return _rxValidator;
+    }
     void setRxValidator(const QString &str);
 
 protected:
@@ -36,18 +45,22 @@ protected:
     void changeEvent(QEvent *event) override;
 
     void addWidget(QWidget *w);
-    void setPopup(QWidget* w);
-    QFrame *popup() const { return _popup; }
-    virtual void retranslateUi() {}
+    void setPopup(QWidget *w);
+    QFrame *popup() const
+    {
+        return _popup;
+    }
+    virtual void retranslateUi()
+    {
+    }
 
 protected slots:
     virtual void showPopup();
     virtual void hidePopup();
 
 private:
-
     QHBoxLayout *_layout;
-    QList<QWidget*> _toolbuttons;
+    QList<QWidget *> _toolbuttons;
     QFrame *_popup;
 
     // Properties

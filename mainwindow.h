@@ -4,9 +4,9 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QModelIndex>
 #include <QStandardItem>
 #include <QStringList>
-#include <QModelIndex>
 
 class QProgressDialog;
 class Bencode;
@@ -34,8 +34,10 @@ private:
     bool _isCanceled;
 };
 
-
-namespace Ui { class MainWindow; }
+namespace Ui
+{
+class MainWindow;
+}
 
 class MainWindow : public QMainWindow
 {
@@ -108,8 +110,19 @@ protected:
     void changeEvent(QEvent *event);
 
 private:
-    enum Tabs { SimpleTab, FilesTab, JsonTreeTab, RawTab, LogTab };
-    enum class FilesFilters { NameFilter, ExtenstionFilter, TemplateFilter, RegExpFilter  };
+    enum Tabs {
+        SimpleTab,
+        FilesTab,
+        JsonTreeTab,
+        RawTab,
+        LogTab
+    };
+    enum class FilesFilters {
+        NameFilter,
+        ExtenstionFilter,
+        TemplateFilter,
+        RegExpFilter
+    };
 
     void fillCoding();
 
