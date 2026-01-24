@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.5)
 
 include(cmake/QtMajorVersion.cmake)
 
-# Enable PVS support
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Enable/Disable output of compile commands during generation.")
-
 project("Torrent File Editor")
 set(EXE_NAME "torrent-file-editor")
 
@@ -552,8 +549,6 @@ set(OTHER_FILES
   .gitignore
   .travis.yml
   CMakeDMGSetup.scpt
-  PVS-Studio.cfg
-  Plog-Converter.cfg
   README.md
   appcast.json.in
   appcast.xml.in
@@ -572,41 +567,3 @@ collect_info_files(${OTHER_FILES})
 
 # Create dummy target/project for an IDE with documents attached
 add_custom_target(docs SOURCES ${INFO_FILES})
-
-if(CMAKE_EXPORT_COMPILE_COMMANDS)
-  if(NOT PVS_ANALYZER)
-    find_program(PVS_ANALYZER pvs-studio-analyzer)
-    find_program(PVS_CONVERTER plog-converter)
-
-    if(PVS_ANALYZER AND PVS_CONVERTER)
-      message(STATUS "Found PVS-Studio: ${PVS_ANALYZER}")
-    endif()
-  endif()
-
-  mark_as_advanced(PVS_ANALYZER PVS_CONVERTER)
-  if(PVS_ANALYZER AND PVS_CONVERTER)
-    if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-      set(PVS_PREPROCESSOR "clang")
-    else()
-      set(PVS_PREPROCESSOR "gcc")
-    endif()
-
-    include(ProcessorCount)
-    ProcessorCount(N)
-
-    add_custom_target(analyze
-                      COMMAND ${PVS_ANALYZER} analyze
-                              -o PVS-Studio.log.raw
-                              --preprocessor=${PVS_PREPROCESSOR}
-                              -e ${CMAKE_BINARY_DIR}
-                              -c ${CMAKE_SOURCE_DIR}/PVS-Studio.cfg
-                              -j ${N}
-                      COMMAND ${PVS_CONVERTER} -t errorfile PVS-Studio.log.raw -o PVS-Studio.log -s ${CMAKE_SOURCE_DIR}/Plog-Converter.cfg
-                      COMMAND rm -f PVS-Studio.log.raw
-                      COMMAND sed -i "'/^www\\.viva64\\.com/d'" PVS-Studio.log
-                      COMMAND cat PVS-Studio.log 1>&2
-                      COMMENT "Analyze ${EXE_NAME}"
-                      DEPENDS ${EXE_NAME}
-    )
-  endif()
-endif()
