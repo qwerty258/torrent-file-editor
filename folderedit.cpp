@@ -29,7 +29,7 @@ FolderEdit::FolderEdit(QWidget *parent)
 
     connect(_pbOpenFolder, SIGNAL(clicked()), SLOT(openFolder()));
 
-    retranslateUi();
+    retranslateUi(); // NOLINT(clang-analyzer-optin.cplusplus.VirtualCall)
 }
 
 void FolderEdit::setFolder(const QString &path)

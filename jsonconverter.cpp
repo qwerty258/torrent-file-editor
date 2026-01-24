@@ -46,9 +46,9 @@ static nlohmann::ordered_json variantToJson(const QVariant &variantValue)
     nlohmann::ordered_json res;
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    switch (variantValue.typeId()) {
+    switch (static_cast<QMetaType::Type>(variantValue.typeId())) {
 #else
-    switch (variantValue.type()) {
+    switch (static_cast<QMetaType::Type>(variantValue.type())) {
 #endif
     case QMetaType::QVariantMap: {
         QVariantMap map = variantValue.toMap();

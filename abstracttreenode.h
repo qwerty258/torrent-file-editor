@@ -76,7 +76,7 @@ public:
     inline void appendChild(T *child)
     {
         Q_ASSERT(child);
-        Q_ASSERT(!child->_parent);
+        Q_ASSERT(child && !child->_parent);
 
         if (child->_parent) {
             child->_parent->removeChild(child);

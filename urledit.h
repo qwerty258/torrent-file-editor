@@ -7,7 +7,7 @@
 
 class QPushButton;
 
-class UrlEdit final : public LineEditWidget
+class UrlEdit : public LineEditWidget
 {
     Q_OBJECT
 

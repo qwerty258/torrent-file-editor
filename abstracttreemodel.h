@@ -5,8 +5,6 @@
 
 #include <QAbstractItemModel>
 
-#include "abstracttreenode.h"
-
 template<typename T>
 class AbstractTreeModel : public QAbstractItemModel
 {

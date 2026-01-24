@@ -44,7 +44,7 @@ UrlEdit::UrlEdit(QWidget *parent)
 
     connect(_pbOpenUrl, SIGNAL(clicked()), SLOT(openUrl()));
 
-    retranslateUi();
+    retranslateUi(); // NOLINT(clang-analyzer-optin.cplusplus.VirtualCall)
 }
 
 void UrlEdit::openUrl()

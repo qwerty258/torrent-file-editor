@@ -10,7 +10,7 @@
 class QPushButton;
 class QCalendarWidget;
 
-class DateWidget final : public LineEditWidget
+class DateWidget : public LineEditWidget
 {
     Q_OBJECT
 

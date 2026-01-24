@@ -4,7 +4,6 @@
 
 #include "mainwindow.h"
 #include "aboutdlg.h"
-#include "bencode.h"
 #include "bencodedelegate.h"
 #include "bencodemodel.h"
 #include "jsonconverter.h"
@@ -273,10 +272,10 @@ MainWindow::MainWindow(QWidget *parent)
     fillCoding();
     updateFilesSize();
 
-    connect(_bencodeModel, SIGNAL(dataChanged(const QModelIndex &, const QModelIndex &)), SLOT(updateTitle()));
-    connect(_bencodeModel, SIGNAL(rowsMoved(const QModelIndex &, int, int, const QModelIndex &, int)), SLOT(updateTitle()));
-    connect(_bencodeModel, SIGNAL(rowsRemoved(const QModelIndex &, int, int)), SLOT(updateTitle()));
-    connect(_bencodeModel, SIGNAL(rowsInserted(const QModelIndex &, int, int)), SLOT(updateTitle()));
+    connect(_bencodeModel, SIGNAL(dataChanged(QModelIndex, QModelIndex)), SLOT(updateTitle())); // clazy:exclude=connect-not-normalized
+    connect(_bencodeModel, SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)), SLOT(updateTitle())); // clazy:exclude=connect-not-normalized
+    connect(_bencodeModel, SIGNAL(rowsRemoved(QModelIndex, int, int)), SLOT(updateTitle())); // clazy:exclude=connect-not-normalized
+    connect(_bencodeModel, SIGNAL(rowsInserted(QModelIndex, int, int)), SLOT(updateTitle())); // clazy:exclude=connect-not-normalized
     connect(_bencodeModel, SIGNAL(layoutChanged()), SLOT(updateTitle()));
     connect(_bencodeModel, SIGNAL(modelReset()), SLOT(updateTitle()));
 
@@ -347,7 +346,7 @@ void MainWindow::changeTranslation(int index)
     QStringList translationPathes;
     translationPathes << QCoreApplication::applicationDirPath() << QStringLiteral(":/translations");
 
-    for (QString path : translationPathes) {
+    for (const QString &path : translationPathes) {
         if (_translator->load(locale, QStringLiteral("torrentfileeditor"), QStringLiteral("_"), path)) {
             qApp->installTranslator(_translator);
             break;
@@ -547,9 +546,9 @@ void MainWindow::fillCoding()
 {
     QMap<QString, QTextCodec *> codecMap;
 #if QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-    QRegularExpression iso8859RegExp(QStringLiteral("^ISO[- ]8859-([0-9]+).*$"));
+    static QRegularExpression iso8859RegExp(QStringLiteral("^ISO[- ]8859-([0-9]+).*$"));
 #else
-    QRegExp iso8859RegExp(QStringLiteral("ISO[- ]8859-([0-9]+).*"));
+    static QRegExp iso8859RegExp(QStringLiteral("ISO[- ]8859-([0-9]+).*"));
 #endif
 
     for (int mib : QTextCodec::availableMibs()) {
@@ -584,7 +583,7 @@ void MainWindow::fillCoding()
         codecMap.insert(sortKey, codec);
     }
 
-    foreach (QTextCodec *textCodec, codecMap.values()) {
+    foreach (QTextCodec *textCodec, codecMap) {
         ui->cmbCoding->addItem(QString::fromUtf8(textCodec->name()));
     }
 }
@@ -745,11 +744,11 @@ void MainWindow::makeTorrent()
     Worker *worker = new Worker;
     worker->moveToThread(thread);
     connect(thread, SIGNAL(finished()), worker, SLOT(deleteLater()));
-    connect(this, SIGNAL(needHash(const QStringList &, int)), worker, SLOT(doWork(const QStringList &, int)));
+    connect(this, SIGNAL(needHash(QStringList, int)), worker, SLOT(doWork(QStringList, int))); // clazy:exclude=connect-not-normalized
     connect(_progressDialog, SIGNAL(canceled()), worker, SLOT(cancel()));
-    connect(worker, SIGNAL(resultReady(const QByteArray &, const QString &)), this, SLOT(setPieces(const QByteArray &, const QString &)));
+    connect(worker, SIGNAL(resultReady(QByteArray, QString)), this, SLOT(setPieces(QByteArray, QString))); // clazy:exclude=connect-not-normalized
     connect(worker, SIGNAL(progress(int)), _progressDialog, SLOT(setValue(int)));
-    connect(worker, SIGNAL(resultReady(const QByteArray &, const QString &)), thread, SLOT(quit()));
+    connect(worker, SIGNAL(resultReady(QByteArray, QString)), thread, SLOT(quit())); // clazy:exclude=connect-not-normalized
     connect(thread, SIGNAL(finished()), thread, SLOT(deleteLater()));
     thread->start();
 
@@ -1043,7 +1042,7 @@ void MainWindow::addTreeItem()
     if (!index.isValid())
         return;
 
-    index = index.sibling(index.row(), 0);
+    index = index.sibling(index.row(), 0); // clazy:exclude=rule-of-two-soft
     _bencodeModel->appendRow(index);
 }
 
@@ -1058,7 +1057,7 @@ void MainWindow::removeTreeItem()
     QModelIndex parent;
     if (ui->treeJson->selectionModel()->selectedRows().size() == 1) {
         row = currentIndex.row();
-        parent = currentIndex.parent();
+        parent = currentIndex.parent(); // clazy:exclude=rule-of-two-soft
     }
 
     QList<QPersistentModelIndex> indexes;
@@ -1097,7 +1096,7 @@ void MainWindow::showTreeSearchWindow()
 {
     if (!_searchDlg) {
         _searchDlg = new SearchDlg(_bencodeModel, this);
-        connect(_searchDlg, SIGNAL(foundItem(const QModelIndex &)), SLOT(selectTreeItem(QModelIndex)));
+        connect(_searchDlg, SIGNAL(foundItem(QModelIndex)), SLOT(selectTreeItem(QModelIndex)));
     }
 
     _searchDlg->setReplaceModeEnabled(false);
@@ -1108,7 +1107,7 @@ void MainWindow::showTreeReplaceWindow()
 {
     if (!_searchDlg) {
         _searchDlg = new SearchDlg(_bencodeModel, this);
-        connect(_searchDlg, SIGNAL(foundItem(const QModelIndex &)), SLOT(selectTreeItem(QModelIndex)));
+        connect(_searchDlg, SIGNAL(foundItem(QModelIndex)), SLOT(selectTreeItem(QModelIndex)));
     }
 
     _searchDlg->setReplaceModeEnabled(true);
@@ -1171,8 +1170,8 @@ void MainWindow::updateBencodeFromRaw()
         ui->lblRawError->setText(QString());
         _bencodeModel->setJson(variant);
     } else {
-        int line = str.left(byte).count(QStringLiteral("\n")) + 1;
-        ui->lblRawError->setText(QString(tr("Error on %1 line: %2")).arg(QString::number(line)).arg(message));
+        int line = str.left(byte).count(QStringLiteral("\n")) + 1; // clazy:exclude=qstring-ref
+        ui->lblRawError->setText(QString(tr("Error on %1 line: %2")).arg(QString::number(line), message));
     }
 }
 

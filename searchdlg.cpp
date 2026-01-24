@@ -24,8 +24,8 @@ SearchDlg::SearchDlg(BencodeModel *model, QWidget *parent)
 #endif
 {
     ui->setupUi(this);
-    connect(_model, SIGNAL(rowsRemoved(QModelIndex, int, int)), SLOT(resetSearchList()));
-    connect(_model, SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)), SLOT(resetSearchList()));
+    connect(_model, SIGNAL(rowsRemoved(QModelIndex, int, int)), SLOT(resetSearchList())); // clazy:exclude=connect-not-normalized
+    connect(_model, SIGNAL(rowsMoved(QModelIndex, int, int, QModelIndex, int)), SLOT(resetSearchList())); // clazy:exclude=connect-not-normalized
 
 #ifdef Q_OS_MAC
     // Workaround. Qt has no size grip on Mac OS X. Bug?

@@ -47,7 +47,7 @@ Version parseVersion(const QString &version)
     QString part2 = version.section(QLatin1Char('-'), 1);
 
 #if QT_VERSION >= QT_VERSION_CHECK(5, 0, 0)
-    QRegularExpression rx(QStringLiteral("^v?(\\d+)\\.(\\d+)\\.(\\d+)$"));
+    static QRegularExpression rx(QStringLiteral("^v?(\\d+)\\.(\\d+)\\.(\\d+)$"));
     QRegularExpressionMatch match = rx.match(part1);
     if (match.hasMatch()) {
         ver.major = match.captured(1).toInt();
@@ -63,7 +63,7 @@ Version parseVersion(const QString &version)
         ver.dirty = !match.captured(3).isEmpty();
     }
 #else
-    QRegExp rx(QStringLiteral("^v?(\\d+)\\.(\\d+)\\.(\\d+)$"));
+    static QRegExp rx(QStringLiteral("^v?(\\d+)\\.(\\d+)\\.(\\d+)$"));
     if (rx.indexIn(part1) != -1) {
         ver.major = rx.cap(1).toInt();
         ver.minor = rx.cap(2).toInt();
@@ -136,7 +136,7 @@ AboutDlg::AboutDlg(QWidget *parent)
 
     QString buildDate = QLocale::system().toString(Application::buildDateTime().date());
 
-    ui->label->setText(QStringLiteral(VERSION_LABEL).arg(qApp->applicationName()).arg(qApp->applicationVersion()).arg(buildDate));
+    ui->label->setText(QStringLiteral(VERSION_LABEL).arg(qApp->applicationName(), qApp->applicationVersion(), buildDate));
     setWindowTitle(QString(tr("About %1")).arg(qApp->applicationName()));
 
 #ifdef NO_DONATION

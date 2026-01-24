@@ -61,7 +61,7 @@ DateWidget::DateWidget(QWidget *parent)
 
     setPopup(_calendar);
 
-    connect(_calendar, SIGNAL(clicked(const QDate &)), SLOT(closeCalendar(const QDate &)));
+    connect(_calendar, SIGNAL(clicked(QDate)), SLOT(closeCalendar(QDate)));
     connect(_tbCalendar, SIGNAL(clicked()), SLOT(showPopup()));
     connect(_tbCalendar, SIGNAL(clicked()), SLOT(calendarSetDate()));
 
@@ -69,7 +69,7 @@ DateWidget::DateWidget(QWidget *parent)
 
     setOptimalLength(QDateTime(QDate(2000, 12, 12), QTime(10, 10, 10)).toString(dateFormat()).size());
 
-    retranslateUi();
+    retranslateUi(); // NOLINT(clang-analyzer-optin.cplusplus.VirtualCall)
 }
 
 void DateWidget::setDate(const QDate &date)

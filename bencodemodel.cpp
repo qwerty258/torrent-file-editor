@@ -439,7 +439,6 @@ qulonglong BencodeModel::totalSize() const
 
     // Torrent contains only one file
     if (!info->child("files")) {
-        QString baseName;
         if (info->child("name") && info->child("name")->isString()) {
             qlonglong length = 0;
             if (info->child("length") && info->child("length")->isInteger()) {
@@ -455,7 +454,6 @@ qulonglong BencodeModel::totalSize() const
 
         for (int i = 0; i < list->childCount(); i++) {
             Bencode *item = list->child(i);
-            QStringList path;
             Bencode *pathList = item->child("path");
             if (!pathList) {
                 continue;
@@ -538,7 +536,7 @@ void BencodeModel::appendRow(const QModelIndex &parent)
 #pragma GCC diagnostic ignored "-Wdeprecated-copy"
 #endif
         // In Qt4 QModelIdex has user-defined copy constructor but hasn't user-defined assignment
-        parentIndex = parent.parent();
+        parentIndex = parent.parent(); // clazy:exclude=rule-of-two-soft
 #ifndef __clang__
 #pragma GCC diagnostic pop
 #endif

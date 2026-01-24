@@ -7,7 +7,7 @@
 
 class QPushButton;
 
-class FolderEdit final : public LineEditWidget
+class FolderEdit : public LineEditWidget
 {
     Q_OBJECT
 

@@ -5,6 +5,7 @@
 #include "bencode.h"
 
 #include <QDebug>
+#include <QMetaType>
 #include <QStringList>
 
 QStringList hexKeys{QStringLiteral("pieces"), QStringLiteral("originator"), QStringLiteral("certificate"), QStringLiteral("signature")};
@@ -138,12 +139,12 @@ Bencode *Bencode::fromJson(const QVariant &json)
 {
     Bencode *res = nullptr;
 
-    switch (json.userType()) {
-    case QVariant::String:
+    switch (static_cast<QMetaType::Type>(json.userType())) {
+    case QMetaType::Type::QString:
         res = new Bencode(toRawString(json.toString()));
         break;
 
-    case QVariant::Map: {
+    case QMetaType::Type::QVariantMap: {
         QVariantMap variantMap = json.toMap();
         res = new Bencode(Type::Dictionary);
         QStringList keys = variantMap.keys();
@@ -164,7 +165,7 @@ Bencode *Bencode::fromJson(const QVariant &json)
         break;
     }
 
-    case QVariant::List: {
+    case QMetaType::Type::QVariantList: {
         QVariantList variantList = json.toList();
         res = new Bencode(Type::List);
         for (int i = 0; i < variantList.size(); ++i) {
@@ -173,11 +174,11 @@ Bencode *Bencode::fromJson(const QVariant &json)
         break;
     }
 
-    case QVariant::UInt:
-    case QVariant::Int:
-    case QVariant::ULongLong:
-    case QVariant::LongLong:
-    case QVariant::Double:
+    case QMetaType::Type::UInt:
+    case QMetaType::Type::Int:
+    case QMetaType::Type::ULongLong:
+    case QMetaType::Type::LongLong:
+    case QMetaType::Type::Double:
         res = new Bencode(json.toLongLong());
         break;
 
