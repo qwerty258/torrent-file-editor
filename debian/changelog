@@ -1,3 +1,13 @@
+torrent-file-editor (1.0.3) UNRELEASED; urgency=medium
+
+  * Update translations
+  * Add Source field to Main tab
+  * Add button to open URL from Comment field to Main tab
+  * Fix date time format in Date created
+  * Fix #172
+
+ -- Ivan Romanov <drizt72@zoho.eu>  Fri, 5 Jun 2026 16:11:57 +0500
+
 torrent-file-editor (1.0.2) UNRELEASED; urgency=medium
 
   * Update translations
